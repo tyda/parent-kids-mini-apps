@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6d5dfc" />
+  <title>親子任務骰子｜今天去哪裡冒險？</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero-card">
+      <div class="top-row">
+        <div>
+          <p class="eyebrow">親子小遊戲</p>
+          <h1>抽一個小任務</h1>
+        </div>
+        <button id="soundBtn" class="ghost-btn" type="button" aria-pressed="false">🔈 音效</button>
+      </div>
+      <p class="subtitle">按一下骰子，幫孩子抽一題「想像場景 × 小任務 × 完成獎勵」。不用真的到那個地方，把它當成故事背景就好。</p>
+    </section>
+
+    <section class="game-card" aria-live="polite">
+      <div id="diceFace" class="dice-face" role="img" aria-label="冒險骰子">🎲</div>
+      <div class="result-stack">
+        <article class="result-chip place">
+          <span class="label">想像場景</span>
+          <strong id="placeText">森林停車場</strong>
+        </article>
+        <article class="result-chip mission">
+          <span class="label">小任務</span>
+          <strong id="missionText">找出 3 個圓形東西</strong>
+        </article>
+        <article class="result-chip reward">
+          <span class="label">完成獎勵</span>
+          <strong id="rewardText">獲得一顆星星貼紙</strong>
+        </article>
+      </div>
+      <div class="button-row">
+        <button id="rollBtn" class="primary-btn" type="button">抽一題 ✨</button>
+        <button id="saveBtn" class="secondary-btn" type="button">收藏 ⭐</button>
+      </div>
+    </section>
+
+    <section class="score-card">
+      <div>
+        <span class="small-label">今日星星</span>
+        <div id="stars" class="stars">☆☆☆☆☆</div>
+      </div>
+      <button id="starBtn" class="round-btn" type="button">完成 +1</button>
+      <button id="resetBtn" class="text-btn" type="button">重置</button>
+    </section>
+
+    <section class="saved-card">
+      <div class="section-title-row">
+        <h2>收藏任務</h2>
+        <button id="clearSavedBtn" class="text-btn" type="button">清空</button>
+      </div>
+      <ul id="savedList" class="saved-list"></ul>
+      <p id="emptySaved" class="empty-text">還沒有收藏，抽到好笑的任務可以存起來。</p>
+    </section>
+
+    <section class="parent-card">
+      <h2>怎麼玩？</h2>
+      <ul>
+        <li>先按「抽一題」，大人把三行文字念給孩子聽。</li>
+        <li>「想像場景」只是故事背景，不用真的到那裡。</li>
+        <li>孩子完成「小任務」後，按「完成 +1」加一顆星。</li>
+        <li>集滿 5 顆星，可以換一個小獎勵：選睡前故事、選一首歌、抱抱加碼。</li>
+      </ul>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

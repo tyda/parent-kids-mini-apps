@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>計程車跳錶測試</title>
+  <style>
+    body { font-family: system-ui, "Noto Sans TC", sans-serif; padding: 20px; line-height: 1.5; }
+    .pass { color: #087f5b; }
+    .fail { color: #c92a2a; }
+    li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <h1>計程車跳錶核心邏輯測試</h1>
+  <ol id="results"></ol>
+  <script src="app.js"></script>
+  <script>
+    const M = window.TaxiMeterKids;
+    const results = document.getElementById('results');
+    let failed = 0;
+
+    function test(name, fn) {
+      const li = document.createElement('li');
+      try {
+        fn();
+        li.className = 'pass';
+        li.textContent = '✅ ' + name;
+      } catch (err) {
+        failed += 1;
+        li.className = 'fail';
+        li.textContent = '❌ ' + name + '：' + err.message;
+      }
+      results.appendChild(li);
+    }
+
+    function eq(actual, expected) {
+      if (actual !== expected) throw new Error(`expected ${expected}, got ${actual}`);
+    }
+
+    test('起程 0 公尺仍為 85 元', () => {
+      const s = M.createState();
+      eq(M.calculateFare(s).total, 85);
+    });
+
+    test('1.25 公里內仍為 85 元', () => {
+      const s = M.createState();
+      M.addDistance(s, 1250);
+      eq(M.calculateFare(s).total, 85);
+    });
+
+    test('超過 1.25 公里 1 公尺就跳 5 元', () => {
+      const s = M.createState();
+      M.addDistance(s, 1251);
+      eq(M.calculateFare(s).total, 90);
+    });
+
+    test('1.65 公里為兩跳續程：95 元', () => {
+      const s = M.createState();
+      M.addDistance(s, 1650);
+      eq(M.calculateFare(s).total, 95);
+    });
+
+    test('等待 60 秒加 5 元', () => {
+      const s = M.createState();
+      M.start(s);
+      M.setManualWaiting(s, true);
+      M.tick(s, 60);
+      eq(M.calculateFare(s).waitingFare, 5);
+      eq(M.calculateFare(s).total, 90);
+    });
+
+    test('等待設定 100 秒時，99 秒不跳、100 秒跳', () => {
+      const s = M.createState();
+      M.setWaitingInterval(s, 100);
+      M.start(s);
+      M.setManualWaiting(s, true);
+      M.tick(s, 99);
+      eq(M.calculateFare(s).waitingFare, 0);
+      M.tick(s, 1);
+      eq(M.calculateFare(s).waitingFare, 5);
+    });
+
+    test('夜間加成 +20% 並進位到整數', () => {
+      const s = M.createState();
+      M.setNight(s, true);
+      eq(M.calculateFare(s).total, 102);
+    });
+
+    test('暫停時 tick 不增加時間', () => {
+      const s = M.createState();
+      M.start(s);
+      M.pause(s);
+      M.tick(s, 60);
+      eq(s.elapsedSeconds, 0);
+    });
+
+    test('GPS 兩點距離可累加', () => {
+      const s = M.createState();
+      M.updateFromGps(s, { coords: { latitude: 24, longitude: 120, accuracy: 10 }, timestamp: 1 });
+      M.updateFromGps(s, { coords: { latitude: 24, longitude: 120.001, accuracy: 10 }, timestamp: 2 });
+      if (s.distanceMeters <= 0) throw new Error('distance should be > 0');
+    });
+
+    const summary = document.createElement('p');
+    summary.textContent = failed ? `有 ${failed} 個測試失敗` : '全部測試通過';
+    summary.className = failed ? 'fail' : 'pass';
+    document.body.appendChild(summary);
+  </script>
+</body>
+</html>

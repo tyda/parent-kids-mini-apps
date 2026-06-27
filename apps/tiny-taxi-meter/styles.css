@@ -1,0 +1,645 @@
+:root {
+  color-scheme: dark;
+  --bg: #101521;
+  --panel: rgba(255,255,255,0.09);
+  --panel-strong: rgba(255,255,255,0.14);
+  --text: #f8fafc;
+  --muted: #b8c3d9;
+  --accent: #ffd166;
+  --accent-2: #4dd4ac;
+  --danger: #ff6b6b;
+  --shadow: 0 18px 50px rgba(0,0,0,0.35);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,209,102,0.24), transparent 28rem),
+    radial-gradient(circle at 85% 0%, rgba(77,212,172,0.20), transparent 24rem),
+    linear-gradient(145deg, #121826 0%, #0b1020 100%);
+  color: var(--text);
+}
+
+button, input, select { font: inherit; }
+
+.app-shell {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  letter-spacing: .18em;
+  font-weight: 800;
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+}
+
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  font-size: clamp(2rem, 8vw, 4.3rem);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+h2 { font-size: 1.18rem; }
+
+.subtitle, .hint, li { color: var(--muted); line-height: 1.6; }
+
+.status-card, .meter-card, .settings-card, .details-card, .note-card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.status-card {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+#status { font-weight: 900; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.badges b {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #101521;
+  background: var(--accent);
+  font-size: 0.78rem;
+}
+.badges b:nth-child(2) { background: var(--danger); color: white; }
+.badges b:nth-child(3) { background: var(--accent-2); }
+
+.meter-card {
+  padding: 22px;
+  text-align: center;
+  margin-bottom: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+}
+
+.fare-label { color: var(--muted); font-weight: 700; }
+.fare {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(4rem, 20vw, 8.8rem);
+  font-weight: 950;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: 0 8px 30px rgba(255,209,102,0.25);
+  margin: 12px 0 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stats-grid div {
+  border-radius: 18px;
+  padding: 12px 8px;
+  background: rgba(0,0,0,0.18);
+}
+.stats-grid span { display: block; color: var(--muted); font-size: 0.82rem; }
+.stats-grid strong { display: block; margin-top: 5px; font-size: 1.05rem; }
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+button {
+  min-height: 54px;
+  border: 0;
+  border-radius: 18px;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--panel-strong);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
+  font-weight: 900;
+  cursor: pointer;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+button:active { transform: translateY(1px) scale(0.99); }
+button.primary { background: linear-gradient(135deg, #26c281, #4dd4ac); color: #07130f; }
+button.danger { background: linear-gradient(135deg, #ff6b6b, #ff8e72); color: #230606; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+
+.settings-card, .details-card, .note-card {
+  padding: 18px;
+  margin-top: 14px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 14px 0;
+}
+
+select, input {
+  width: 100%;
+  margin-top: 7px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  background: rgba(0,0,0,0.28);
+  color: var(--text);
+  min-height: 46px;
+  padding: 10px 12px;
+}
+
+#details {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.note-card ul { padding-left: 1.2rem; margin-bottom: 0; }
+
+@media (min-width: 760px) {
+  .hero { grid-template-columns: 1fr 280px; align-items: end; }
+  .controls { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .settings-card { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .settings-card h2, .settings-card .hint { grid-column: 1 / -1; }
+}
+
+/* 手機橫向模式：把主要跳錶與按鈕壓進同一個視野，方便在車上橫拿手機玩。 */
+@media (orientation: landscape) and (max-height: 560px) {
+  body {
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  .app-shell {
+    width: min(1180px, 100%);
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(420px, 1.1fr);
+    grid-template-areas:
+      "hero meter"
+      "controls meter"
+      "settings details"
+      "note note";
+    gap: 8px 10px;
+    padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  }
+
+  .hero {
+    grid-area: hero;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 3px;
+    font-size: 0.68rem;
+  }
+
+  h1 {
+    font-size: clamp(1.25rem, 4.4vw, 2.1rem);
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 0.74rem;
+    line-height: 1.35;
+    margin-bottom: 0;
+  }
+
+  .status-card {
+    padding: 8px 10px;
+    border-radius: 16px;
+    font-size: 0.82rem;
+  }
+
+  .badges b {
+    padding: 3px 7px;
+    font-size: 0.68rem;
+  }
+
+  .meter-card {
+    grid-area: meter;
+    min-height: calc(100svh - 18px);
+    margin: 0;
+    padding: 12px;
+    border-radius: 20px;
+    display: grid;
+    align-content: center;
+  }
+
+  .fare-label {
+    font-size: 0.82rem;
+  }
+
+  .fare {
+    font-size: clamp(4.3rem, 18vw, 8.2rem);
+    margin: 4px 0 10px;
+  }
+
+  .stats-grid {
+    gap: 7px;
+  }
+
+  .stats-grid div {
+    padding: 8px 6px;
+    border-radius: 14px;
+  }
+
+  .stats-grid span {
+    font-size: 0.68rem;
+  }
+
+  .stats-grid strong {
+    font-size: 0.92rem;
+  }
+
+  .controls {
+    grid-area: controls;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    margin: 0;
+  }
+
+  button {
+    min-height: 42px;
+    border-radius: 14px;
+    padding: 7px 8px;
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+
+  .settings-card {
+    grid-area: settings;
+  }
+
+  .details-card {
+    grid-area: details;
+  }
+
+  .settings-card,
+  .details-card,
+  .note-card {
+    margin-top: 0;
+    padding: 10px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  .settings-card h2,
+  .details-card h2,
+  .note-card h2 {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+
+  label {
+    margin: 7px 0;
+    font-size: 0.76rem;
+  }
+
+  select,
+  input {
+    min-height: 36px;
+    border-radius: 12px;
+    padding: 6px 8px;
+    margin-top: 4px;
+  }
+
+  .hint,
+  li {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  #details {
+    margin-top: 0;
+    padding-left: 1rem;
+  }
+
+  .note-card {
+    grid-area: note;
+  }
+}
+
+/* 極矮的橫向手機：隱藏說明卡，保留真正會操作的跳錶區。 */
+@media (orientation: landscape) and (max-height: 430px) {
+  .app-shell {
+    grid-template-columns: minmax(330px, 1fr) minmax(360px, 1fr);
+    grid-template-areas:
+      "hero meter"
+      "controls meter"
+      "settings meter";
+    align-content: start;
+  }
+
+  .note-card,
+  .details-card {
+    display: none;
+  }
+
+  .meter-card {
+    min-height: calc(100svh - 16px);
+  }
+
+  .fare {
+    font-size: clamp(4rem, 17vw, 7rem);
+  }
+}
+
+
+/* Pixel / Android Chrome fallback: some Android browsers do not reliably match orientation media queries when URL bars or display scaling are active. JS toggles body.landscape-layout from visualViewport. */
+
+  body.landscape-layout body {
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  body.landscape-layout .app-shell {
+    width: min(1180px, 100%);
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(420px, 1.1fr);
+    grid-template-areas:
+      "hero meter"
+      "controls meter"
+      "settings details"
+      "note note";
+    gap: 8px 10px;
+    padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  }
+
+  body.landscape-layout .hero {
+    grid-area: hero;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin: 0;
+  }
+
+  body.landscape-layout .eyebrow {
+    margin-bottom: 3px;
+    font-size: 0.68rem;
+  }
+
+  body.landscape-layout h1 {
+    font-size: clamp(1.25rem, 4.4vw, 2.1rem);
+    margin-bottom: 4px;
+  }
+
+  body.landscape-layout .subtitle {
+    font-size: 0.74rem;
+    line-height: 1.35;
+    margin-bottom: 0;
+  }
+
+  body.landscape-layout .status-card {
+    padding: 8px 10px;
+    border-radius: 16px;
+    font-size: 0.82rem;
+  }
+
+  body.landscape-layout .badges b {
+    padding: 3px 7px;
+    font-size: 0.68rem;
+  }
+
+  body.landscape-layout .meter-card {
+    grid-area: meter;
+    min-height: calc(100svh - 18px);
+    margin: 0;
+    padding: 12px;
+    border-radius: 20px;
+    display: grid;
+    align-content: center;
+  }
+
+  body.landscape-layout .fare-label {
+    font-size: 0.82rem;
+  }
+
+  body.landscape-layout .fare {
+    font-size: clamp(4.3rem, 18vw, 8.2rem);
+    margin: 4px 0 10px;
+  }
+
+  body.landscape-layout .stats-grid {
+    gap: 7px;
+  }
+
+  body.landscape-layout .stats-grid div {
+    padding: 8px 6px;
+    border-radius: 14px;
+  }
+
+  body.landscape-layout .stats-grid span {
+    font-size: 0.68rem;
+  }
+
+  body.landscape-layout .stats-grid strong {
+    font-size: 0.92rem;
+  }
+
+  body.landscape-layout .controls {
+    grid-area: controls;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    margin: 0;
+  }
+
+  body.landscape-layout button {
+    min-height: 42px;
+    border-radius: 14px;
+    padding: 7px 8px;
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+
+  body.landscape-layout .settings-card {
+    grid-area: settings;
+  }
+
+  body.landscape-layout .details-card {
+    grid-area: details;
+  }
+
+  body.landscape-layout .settings-card,
+body.landscape-layout .details-card,
+body.landscape-layout .note-card {
+    margin-top: 0;
+    padding: 10px;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+
+  body.landscape-layout .settings-card h2,
+body.landscape-layout .details-card h2,
+body.landscape-layout .note-card h2 {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+
+  body.landscape-layout label {
+    margin: 7px 0;
+    font-size: 0.76rem;
+  }
+
+  body.landscape-layout select,
+body.landscape-layout input {
+    min-height: 36px;
+    border-radius: 12px;
+    padding: 6px 8px;
+    margin-top: 4px;
+  }
+
+  body.landscape-layout .hint,
+body.landscape-layout li {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  body.landscape-layout #details {
+    margin-top: 0;
+    padding-left: 1rem;
+  }
+
+  body.landscape-layout .note-card {
+    grid-area: note;
+  }
+
+
+/* 極矮橫向 fallback：由 JS 依 visualViewport 高度套用。 */
+
+  body.landscape-compact .app-shell {
+    grid-template-columns: minmax(330px, 1fr) minmax(360px, 1fr);
+    grid-template-areas:
+      "hero meter"
+      "controls meter"
+      "settings meter";
+    align-content: start;
+  }
+
+  body.landscape-compact .note-card,
+body.landscape-compact .details-card {
+    display: none;
+  }
+
+  body.landscape-compact .meter-card {
+    min-height: calc(100svh - 16px);
+  }
+
+  body.landscape-compact .fare {
+    font-size: clamp(4rem, 17vw, 7rem);
+  }
+
+
+
+/* Pixel / Android Chrome landscape fit overrides.
+   The screenshot showed the landscape layout was active, but Chrome's toolbar left less vertical room:
+   h1 was clipped and settings overflowed below the screen. These rules keep the dashboard usable. */
+@media (orientation: landscape) and (max-height: 640px) {
+  h1 {
+    line-height: 1.16;
+    padding-top: 0.08em;
+  }
+
+  .app-shell {
+    align-content: start;
+  }
+
+  .meter-card {
+    min-height: auto;
+  }
+}
+
+body.landscape-layout h1 {
+  line-height: 1.16;
+  padding-top: 0.08em;
+}
+
+body.landscape-compact {
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+body.landscape-compact .app-shell {
+  min-height: auto;
+  grid-template-columns: minmax(340px, 0.95fr) minmax(360px, 1.05fr);
+  grid-template-areas:
+    "hero meter"
+    "controls meter";
+  gap: 8px 10px;
+  align-content: start;
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+body.landscape-compact .settings-card,
+body.landscape-compact .details-card,
+body.landscape-compact .note-card {
+  display: none;
+}
+
+body.landscape-compact .meter-card {
+  min-height: auto;
+  height: calc(100svh - 24px);
+  padding: 10px;
+}
+
+body.landscape-compact .fare {
+  font-size: clamp(3.8rem, 15vw, 6.5rem);
+  margin: 2px 0 8px;
+}
+
+body.landscape-compact .stats-grid div {
+  padding: 7px 5px;
+}
+
+body.landscape-compact .settings-card {
+  padding: 9px 10px;
+  overflow: hidden;
+}
+
+body.landscape-compact .settings-card h2 {
+  margin-bottom: 4px;
+}
+
+body.landscape-compact label {
+  margin: 5px 0;
+}
+
+body.landscape-compact .hint {
+  display: none;
+}
+
+body.landscape-compact select,
+body.landscape-compact input {
+  min-height: 34px;
+  padding: 5px 8px;
+}
+
+/* 長按鈕可換行；短開關按鈕保持不斷行。 */
+#nightBtn {
+  white-space: normal;
+}

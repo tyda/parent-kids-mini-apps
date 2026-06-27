@@ -1,0 +1,10 @@
+{
+  "name": "親子任務骰子",
+  "short_name": "任務骰子",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff6d7",
+  "theme_color": "#6d5dfc",
+  "description": "給親子在車上、餐廳、睡前玩的地點任務骰子。",
+  "icons": []
+}

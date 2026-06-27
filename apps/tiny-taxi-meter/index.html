@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#121826">
+  <title>小小計程車行｜親子計程車跳錶</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=20260621-aidc">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">小小計程車行｜親子車上遊戲</p>
+        <h1 id="title">小小計程車跳錶 🚕</h1>
+        <p class="subtitle">歡迎搭乘小小計程車行：起程 1.25 km / $85，續程每 200 m / $5，等待每 60 或 100 秒 / $5。</p>
+      </div>
+      <div class="status-card" aria-live="polite">
+        <span id="status">準備開始</span>
+        <div class="badges">
+          <b id="nightBadge" hidden>夜間 +20%</b>
+          <b id="waitingBadge" hidden>等待中</b>
+          <b id="gpsBadge" hidden>GPS</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="meter-card" aria-label="目前跳錶金額">
+      <div class="fare-label">小小計程車行｜目前車資</div>
+      <div id="fare" class="fare" aria-live="polite">$85</div>
+      <div class="stats-grid">
+        <div>
+          <span>距離</span>
+          <strong id="distance">0 m</strong>
+        </div>
+        <div>
+          <span>行程時間</span>
+          <strong id="elapsed">00:00:00</strong>
+        </div>
+        <div>
+          <span>等待時間</span>
+          <strong id="waiting">00:00:00</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="操作按鈕">
+      <button id="startBtn" class="primary">開始</button>
+      <button id="pauseBtn">暫停</button>
+      <button id="resetBtn" class="danger">重置</button>
+      <button id="nightBtn">切換夜間加成 +20%</button>
+      <button id="waitBtn">等待開/關</button>
+      <button id="gpsBtn">GPS開/關</button>
+      <button id="add200Btn">遊戲加 200m</button>
+      <button id="add1kBtn">遊戲加 1km</button>
+      <button id="snackBtn">吃零食 +100m</button>
+      <button id="videoBtn">看影片 +500m</button>
+    </section>
+
+    <section class="settings-card" aria-label="設定">
+      <h2>遊戲設定</h2>
+      <label>
+        等待跳錶秒數
+        <select id="waitInterval">
+          <option value="60" selected>60 秒跳 $5</option>
+          <option value="100">100 秒跳 $5</option>
+        </select>
+      </label>
+      <label>
+        慢速判定（GPS 模式參考）
+        <input id="slowSpeed" type="number" min="1" max="30" value="5" inputmode="decimal"> km/h 以下視為慢速
+      </label>
+      <p id="gpsStatus" class="hint">尚未啟用 GPS</p>
+    </section>
+
+    <section class="details-card" aria-label="費用明細">
+      <h2>費用明細</h2>
+      <ul id="details"></ul>
+    </section>
+
+    <section class="note-card">
+      <h2>玩法提醒</h2>
+      <ul>
+        <li>車上實際玩時，建議由乘客或小朋友拿手機，駕駛不要操作。</li>
+        <li>如果 GPS 訊號不穩，可以用「遊戲加 200m / 1km」手動模擬跳錶。</li>
+        <li>這是親子遊戲用，不是正式計程車計價器。</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="app.js?v=20260621-snack-video"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      window.TaxiMeterKids.initBrowserApp();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(function () {});
+      }
+    });
+  </script>
+</body>
+</html>

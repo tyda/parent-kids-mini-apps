@@ -1,0 +1,9 @@
+{
+  "name": "小小計程車行｜親子計程車跳錶",
+  "short_name": "小小跳錶",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#101521",
+  "theme_color": "#121826",
+  "lang": "zh-Hant"
+}
