@@ -1,0 +1,11 @@
+{
+  "name": "安靜聲音獵人",
+  "short_name": "聲音獵人",
+  "description": "適合車上、餐廳、排隊、睡前的安靜親子聽覺觀察小遊戲。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6efe4",
+  "theme_color": "#315c7a",
+  "lang": "zh-Hant",
+  "icons": []
+}

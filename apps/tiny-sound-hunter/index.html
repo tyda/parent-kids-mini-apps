@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>安靜聲音獵人</title>
+  <meta name="description" content="不用大聲、不用跑動的親子觀察小遊戲：一起找聲音、猜來源、做小小任務。" />
+  <meta name="theme-color" content="#315c7a" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="game-title">
+      <p class="eyebrow">5–10 分鐘 · 車上 / 等餐 / 睡前</p>
+      <h1 id="game-title">安靜聲音獵人</h1>
+      <p class="lead">用耳朵當望遠鏡：抽一張聲音任務卡，親子一起安靜聽、輪流猜、完成一個小挑戰。</p>
+    </section>
+
+    <section class="how-to" aria-labelledby="how-to-title">
+      <h2 id="how-to-title">怎麼玩</h2>
+      <ol>
+        <li>按「抽一張任務卡」。</li>
+        <li>安靜聽 20 秒，找符合卡片的聲音。</li>
+        <li>輪流說：我聽到什麼？它可能從哪裡來？</li>
+        <li>完成卡片上的小任務，就幫今天的聲音地圖加 1 顆星。</li>
+      </ol>
+    </section>
+
+    <section class="controls" aria-label="遊戲設定">
+      <label class="field">
+        <span>現在在哪裡？</span>
+        <select id="placeSelect">
+          <option value="anywhere">任何地方</option>
+          <option value="car">車上</option>
+          <option value="restaurant">餐廳 / 咖啡店</option>
+          <option value="queue">排隊 / 等候</option>
+          <option value="bedtime">睡前</option>
+        </select>
+      </label>
+      <button id="drawButton" class="primary" type="button">抽一張任務卡</button>
+    </section>
+
+    <section class="card" aria-live="polite" aria-labelledby="card-title">
+      <div class="card-topline">
+        <span id="cardBadge" class="badge">準備開始</span>
+        <span id="stars" class="stars" aria-label="已完成星星數">☆☆☆☆☆</span>
+      </div>
+      <h2 id="card-title">先選地點，再抽任務</h2>
+      <p id="cardPrompt" class="prompt">今天要找哪一種聲音呢？</p>
+      <div class="mission-grid">
+        <div>
+          <strong>想像場景</strong>
+          <p id="sceneText">像小小偵探一樣，把附近聲音拼成一張地圖。</p>
+        </div>
+        <div>
+          <strong>小任務</strong>
+          <p id="taskText">抽卡後會出現 20 秒安靜聽的挑戰。</p>
+        </div>
+        <div>
+          <strong>完成獎勵</strong>
+          <p id="rewardText">完成後按下「完成任務」，收集一顆星。</p>
+        </div>
+      </div>
+      <div class="timer-box">
+        <span id="timerText">20</span>
+        <button id="timerButton" class="secondary" type="button">開始 20 秒安靜聽</button>
+      </div>
+      <div class="actions">
+        <button id="doneButton" class="success" type="button">完成任務 +1 星</button>
+        <button id="resetButton" class="ghost" type="button">重新開始</button>
+      </div>
+    </section>
+
+    <section class="tips" aria-labelledby="tips-title">
+      <h2 id="tips-title">小提醒</h2>
+      <ul>
+        <li>不用真的很安靜；只要比平常小聲一點，讓孩子練習聽見細節。</li>
+        <li>如果在公共場合，改用手指比方向或小小聲描述。</li>
+        <li>睡前可以只玩一張卡，把任務改成「聽到後閉眼想像」。</li>
+      </ul>
+    </section>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>

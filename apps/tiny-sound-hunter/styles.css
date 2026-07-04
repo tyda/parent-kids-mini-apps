@@ -1,0 +1,199 @@
+:root {
+  color-scheme: light;
+  --bg: #f6efe4;
+  --ink: #20323c;
+  --muted: #657985;
+  --card: #fffaf1;
+  --primary: #315c7a;
+  --primary-2: #22445d;
+  --accent: #f0b84d;
+  --green: #4f8a66;
+  --ring: rgba(49, 92, 122, 0.22);
+  font-family: ui-rounded, "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(240, 184, 77, 0.25), transparent 30rem),
+    linear-gradient(160deg, #f6efe4 0%, #dcebf0 100%);
+  color: var(--ink);
+}
+
+button, select { font: inherit; }
+
+.app-shell {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+}
+
+.hero, .how-to, .card, .tips {
+  background: rgba(255, 250, 241, 0.88);
+  border: 1px solid rgba(32, 50, 60, 0.09);
+  border-radius: 26px;
+  box-shadow: 0 18px 45px rgba(32, 50, 60, 0.11);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.eyebrow, .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: #e6f0f4;
+  color: var(--primary-2);
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 7px 12px;
+}
+
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  font-size: clamp(2.15rem, 10vw, 4.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+  margin: 14px 0 12px;
+}
+
+h2 { font-size: 1.2rem; margin-bottom: 10px; }
+
+.lead, .prompt {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+.how-to ol, .tips ul {
+  margin: 0;
+  padding-left: 1.35rem;
+  line-height: 1.7;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  font-weight: 800;
+}
+
+select {
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  background: white;
+  color: var(--ink);
+  padding: 14px 16px;
+  box-shadow: 0 10px 26px rgba(32, 50, 60, 0.08);
+}
+
+button {
+  border: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  font-weight: 900;
+  min-height: 52px;
+  padding: 14px 18px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+button:focus-visible, select:focus-visible {
+  outline: 4px solid var(--ring);
+  outline-offset: 2px;
+}
+
+button:active { transform: translateY(1px) scale(0.99); }
+
+.primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 12px 26px rgba(49, 92, 122, 0.28);
+}
+
+.secondary { background: #f7dc9d; color: #5b3f08; }
+.success { background: var(--green); color: white; }
+.ghost { background: rgba(255,255,255,0.72); color: var(--primary-2); }
+
+.card { border: 2px solid rgba(240, 184, 77, 0.35); }
+.card-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.stars {
+  color: #d59a19;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.mission-grid {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.mission-grid > div {
+  background: white;
+  border-radius: 20px;
+  padding: 14px;
+  border: 1px solid rgba(32, 50, 60, 0.08);
+}
+
+.mission-grid strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--primary-2);
+}
+
+.mission-grid p { margin-bottom: 0; line-height: 1.55; }
+
+.timer-box {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+
+#timerText {
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: #20323c;
+  color: white;
+  font-size: 2rem;
+  font-weight: 950;
+}
+
+.actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+@media (min-width: 720px) {
+  .app-shell { padding: 28px; }
+  .controls { grid-template-columns: 1fr auto; align-items: end; }
+  .mission-grid { grid-template-columns: repeat(3, 1fr); }
+  .actions { grid-template-columns: 1fr 1fr; }
+}
+
+@media (orientation: landscape) and (max-height: 540px) {
+  .app-shell { max-width: 1100px; padding: 12px 16px; }
+  .hero, .how-to, .card, .tips { padding: 14px; border-radius: 20px; margin-bottom: 10px; }
+  h1 { font-size: clamp(2rem, 7vw, 3.3rem); margin: 8px 0; }
+  .how-to ol, .tips ul, .lead, .prompt { line-height: 1.45; }
+  .mission-grid { grid-template-columns: repeat(3, 1fr); margin: 10px 0; }
+}
