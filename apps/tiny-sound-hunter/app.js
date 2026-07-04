@@ -128,6 +128,7 @@ if (typeof window !== 'undefined') {
   const state = createInitialState();
   let countdown = 20;
   let timerId = null;
+  let audioContext = null;
 
   const $ = (id) => document.getElementById(id);
   const placeSelect = $('placeSelect');
@@ -149,6 +150,42 @@ if (typeof window !== 'undefined') {
   function renderStars() {
     $('stars').textContent = formatStars(state.stars);
     $('stars').setAttribute('aria-label', `已完成 ${state.stars} 顆星`);
+  }
+
+  function getAudioContext() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return null;
+    if (!audioContext) audioContext = new AudioContextClass();
+    if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+    return audioContext;
+  }
+
+  function playTone(frequency = 660, duration = 0.12, delay = 0, volume = 0.12) {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const startAt = ctx.currentTime + delay;
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, startAt);
+    gain.gain.setValueAtTime(0.0001, startAt);
+    gain.gain.exponentialRampToValueAtTime(volume, startAt + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+    oscillator.start(startAt);
+    oscillator.stop(startAt + duration + 0.03);
+  }
+
+  function playStartSound() {
+    playTone(523.25, 0.1, 0);
+    playTone(659.25, 0.12, 0.12);
+  }
+
+  function playDoneSound() {
+    playTone(659.25, 0.1, 0);
+    playTone(783.99, 0.1, 0.11);
+    playTone(1046.5, 0.16, 0.22);
   }
 
   function stopTimer(reset = true) {
@@ -182,12 +219,14 @@ if (typeof window !== 'undefined') {
     countdown = 20;
     timerText.textContent = String(countdown);
     timerButton.textContent = '正在聽…再按可暫停';
+    playStartSound();
     timerId = window.setInterval(() => {
       countdown -= 1;
       timerText.textContent = String(countdown);
       if (countdown <= 0) {
         stopTimer(false);
         timerButton.textContent = '完成！再聽一次';
+        playDoneSound();
         countdown = 20;
       }
     }, 1000);
@@ -196,6 +235,7 @@ if (typeof window !== 'undefined') {
   doneButton.addEventListener('click', () => {
     state.stars = nextStarCount(state.stars);
     renderStars();
+    playDoneSound();
   });
 
   resetButton.addEventListener('click', () => {
