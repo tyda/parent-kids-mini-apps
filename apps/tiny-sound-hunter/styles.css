@@ -197,3 +197,5 @@ button:active { transform: translateY(1px) scale(0.99); }
   .how-to ol, .tips ul, .lead, .prompt { line-height: 1.45; }
   .mission-grid { grid-template-columns: repeat(3, 1fr); margin: 10px 0; }
 }
+
+.release-time { display:inline-flex; margin:14px 0 0; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.75); border:1px dashed rgba(255,255,255,.72); color:#315c7a; font-size:13px; }
