@@ -129,6 +129,15 @@ if (typeof window !== 'undefined') {
   let countdown = 20;
   let timerId = null;
   let audioContext = null;
+  let soundTurn = 0;
+
+  const SOUND_THEMES = [
+    { name: '小鳥', start: [523.25, 659.25], tick: 880, done: [659.25, 783.99, 1046.5] },
+    { name: '木魚', start: [392, 523.25], tick: 587.33, done: [523.25, 659.25, 783.99] },
+    { name: '小星星', start: [440, 660], tick: 990, done: [660, 880, 1174.66] },
+    { name: '低音鼓', start: [261.63, 329.63], tick: 392, done: [329.63, 392, 523.25] },
+    { name: '太空波', start: [349.23, 466.16], tick: 698.46, done: [466.16, 622.25, 932.33] }
+  ];
 
   const $ = (id) => document.getElementById(id);
   const placeSelect = $('placeSelect');
@@ -152,17 +161,26 @@ if (typeof window !== 'undefined') {
     $('stars').setAttribute('aria-label', `已完成 ${state.stars} 顆星`);
   }
 
-  function getAudioContext() {
+  function getSoundTheme(offset = 0) {
+    const id = state.currentCard?.id || state.previousId || 'default';
+    const seed = [...id].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    return SOUND_THEMES[(seed + soundTurn + offset) % SOUND_THEMES.length];
+  }
+
+
+  async function getAudioContext() {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return null;
     if (!audioContext) audioContext = new AudioContextClass();
-    if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume().catch(() => null);
+    }
     return audioContext;
   }
 
-  function playTone(frequency = 660, duration = 0.12, delay = 0, volume = 0.12) {
-    const ctx = getAudioContext();
-    if (!ctx) return;
+  async function playTone(frequency = 660, duration = 0.12, delay = 0, volume = 0.14) {
+    const ctx = await getAudioContext();
+    if (!ctx || ctx.state !== 'running') return;
     const oscillator = ctx.createOscillator();
     const gain = ctx.createGain();
     const startAt = ctx.currentTime + delay;
@@ -174,18 +192,28 @@ if (typeof window !== 'undefined') {
     oscillator.connect(gain);
     gain.connect(ctx.destination);
     oscillator.start(startAt);
-    oscillator.stop(startAt + duration + 0.03);
+    oscillator.stop(startAt + duration + 0.04);
   }
 
-  function playStartSound() {
-    playTone(523.25, 0.1, 0);
-    playTone(659.25, 0.12, 0.12);
+  async function playStartSound() {
+    const theme = getSoundTheme();
+    await playTone(theme.start[0], 0.1, 0, 0.14);
+    playTone(theme.start[1], 0.12, 0.12, 0.14);
+    if (navigator.vibrate) navigator.vibrate(25);
   }
 
-  function playDoneSound() {
-    playTone(659.25, 0.1, 0);
-    playTone(783.99, 0.1, 0.11);
-    playTone(1046.5, 0.16, 0.22);
+  function playTickSound(step = 0) {
+    const theme = getSoundTheme(step);
+    playTone(theme.tick, 0.04, 0, 0.06);
+  }
+
+  async function playDoneSound() {
+    const theme = getSoundTheme(1);
+    await playTone(theme.done[0], 0.1, 0, 0.14);
+    playTone(theme.done[1], 0.1, 0.11, 0.14);
+    playTone(theme.done[2], 0.16, 0.22, 0.14);
+    soundTurn = (soundTurn + 1) % SOUND_THEMES.length;
+    if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
   }
 
   function stopTimer(reset = true) {
@@ -223,6 +251,9 @@ if (typeof window !== 'undefined') {
     timerId = window.setInterval(() => {
       countdown -= 1;
       timerText.textContent = String(countdown);
+      if (countdown > 0 && (countdown <= 3 || countdown % 5 === 0)) {
+        playTickSound(countdown);
+      }
       if (countdown <= 0) {
         stopTimer(false);
         timerButton.textContent = '完成！再聽一次';
