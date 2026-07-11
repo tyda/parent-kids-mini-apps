@@ -1,0 +1,11 @@
+{
+  "name": "手指節奏小火車",
+  "short_name": "節奏小火車",
+  "description": "用手指輕敲節奏、輪流當列車長的安靜親子小遊戲。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff7e8",
+  "theme_color": "#e66f2f",
+  "lang": "zh-Hant",
+  "icons": []
+}

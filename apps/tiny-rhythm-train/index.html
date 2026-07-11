@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>手指節奏小火車</title>
+  <meta name="description" content="用手指輕敲節奏、輪流當列車長的安靜親子小遊戲。" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <a class="back-link" href="../../">← 回小工具合集</a>
+      <span class="badge">5–10 分鐘 · 安靜手指節奏 · 車上/等餐可玩</span>
+      <h1>🚂 手指節奏小火車</h1>
+      <p>輪流當列車長，用手指在桌面、膝蓋或手掌上輕敲節奏。孩子模仿成功後，火車就到下一站。</p>
+    </header>
+
+    <section class="how-to" aria-labelledby="how-title">
+      <h2 id="how-title">怎麼玩</h2>
+      <ol>
+        <li>按「開一班新列車」抽出本回合的節奏、車站與小任務。</li>
+        <li>列車長先輕敲節奏，乘客跟著做一次；不用大聲、不用跑動。</li>
+        <li>完成小任務後按「抵達下一站」，收集 3 個車站就完成一趟旅程。</li>
+      </ol>
+    </section>
+
+    <section class="panel" aria-live="polite">
+      <div class="trip-meter" aria-label="旅程進度">
+        <span class="track-dot active" data-dot="0">1</span>
+        <span class="track-line"></span>
+        <span class="track-dot" data-dot="1">2</span>
+        <span class="track-line"></span>
+        <span class="track-dot" data-dot="2">3</span>
+      </div>
+
+      <article class="card" id="round-card">
+        <p class="eyebrow">本班列車</p>
+        <h2 id="station-name">雲朵點心站</h2>
+        <div class="rhythm-box">
+          <span class="rhythm-label">節奏</span>
+          <p id="rhythm-text">輕・輕・停・輕</p>
+        </div>
+        <p class="mission-label">小任務</p>
+        <p class="mission" id="mission-text">說一種像雲的食物，然後用最小聲的火車聲「咻」一下。</p>
+      </article>
+
+      <div class="controls">
+        <button id="new-train" type="button">開一班新列車</button>
+        <button id="next-station" type="button" class="secondary">抵達下一站</button>
+      </div>
+      <p class="helper" id="helper-text">小提醒：如果在安靜場所，可以只做手指動作，不出聲也算完成。</p>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

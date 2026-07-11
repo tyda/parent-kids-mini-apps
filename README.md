@@ -7,6 +7,7 @@
 - `apps/tiny-adventure-dice/`：親子任務骰子
 - `apps/tiny-taxi-meter/`：小小計程車跳錶
 - `apps/tiny-sound-hunter/`：安靜聲音獵人
+- `apps/tiny-rhythm-train/`：手指節奏小火車
 
 ## 部署
 
