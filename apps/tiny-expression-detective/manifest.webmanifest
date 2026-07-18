@@ -1,0 +1,11 @@
+{
+  "name": "表情偵探社",
+  "short_name": "表情偵探",
+  "description": "輪流用表情和小動作演出心情，讓對方安靜猜一猜。",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff9ed",
+  "theme_color": "#6d4aff",
+  "icons": []
+}
