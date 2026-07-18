@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6d4aff" />
+  <meta name="description" content="輪流用表情和小動作演出心情，讓對方安靜猜一猜。" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>表情偵探社</title>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <a class="back" href="../../">← 回到工具合集</a>
+      <p class="eyebrow">5–10 分鐘・兩人輪流・不用出聲也能玩</p>
+      <h1>🕵️ 表情偵探社</h1>
+      <p class="intro">演員偷看心情卡，用臉和小動作演出來；偵探負責猜。猜完就交換角色！</p>
+    </header>
+
+    <section class="progress" aria-label="遊戲進度">
+      <span id="round-label">第 1 回合，共 5 回合</span>
+      <div class="stars" id="stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</div>
+    </section>
+
+    <section class="game-card" aria-live="polite">
+      <p class="role" id="role-label">演員先偷看，別讓偵探看到</p>
+      <div id="secret" class="secret">
+        <span class="emoji" id="emotion-emoji">🤩</span>
+        <h2 id="emotion-name">好期待</h2>
+        <p id="scene-text">像是等一下就要打開一份驚喜。</p>
+      </div>
+      <div id="hidden-card" class="hidden-card" hidden>
+        <span>🔎</span>
+        <h2>偵探，請看表情猜心情</h2>
+        <p id="clue-text">可以觀察眼睛、嘴巴和手勢。</p>
+      </div>
+
+      <button id="hide-answer" class="primary" type="button">藏起答案，交給偵探</button>
+      <div id="guess-actions" class="actions" hidden>
+        <button id="reveal-answer" class="secondary" type="button">看答案</button>
+        <button id="got-it" class="primary" type="button">猜到了！下一回合</button>
+      </div>
+      <div id="reveal-panel" class="reveal" hidden>
+        答案是：<strong id="answer-text"></strong>
+      </div>
+    </section>
+
+    <section class="how-to">
+      <h2>怎麼玩</h2>
+      <ol>
+        <li><strong>演員偷看：</strong>記住心情和想像場景。</li>
+        <li><strong>藏起答案：</strong>把手機交給偵探，再用表情或安靜手勢演出。</li>
+        <li><strong>偵探猜猜：</strong>不用追求標準答案，說說「你從哪裡看出來」更有趣。</li>
+      </ol>
+      <p class="tip">小提醒：不想演某張卡，按「換一張心情卡」就好，沒有輸贏也不扣分。</p>
+      <button id="new-card" class="text-button" type="button">換一張心情卡</button>
+      <button id="restart" class="text-button" type="button">重新開始 5 回合</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

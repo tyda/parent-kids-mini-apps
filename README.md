@@ -8,6 +8,7 @@
 - `apps/tiny-taxi-meter/`：小小計程車跳錶
 - `apps/tiny-sound-hunter/`：安靜聲音獵人
 - `apps/tiny-rhythm-train/`：手指節奏小火車
+- `apps/tiny-expression-detective/`：表情偵探社
 
 ## 部署
 
