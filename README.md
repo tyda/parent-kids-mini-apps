@@ -9,6 +9,7 @@
 - `apps/tiny-sound-hunter/`：安靜聲音獵人
 - `apps/tiny-rhythm-train/`：手指節奏小火車
 - `apps/tiny-expression-detective/`：表情偵探社
+- `apps/tiny-one-line-drawing/`：一筆猜猜畫
 
 ## 部署
 

@@ -1,0 +1,10 @@
+{
+  "name": "一筆猜猜畫",
+  "short_name": "猜猜畫",
+  "description": "輪流在手機上畫題目，讓對方猜答案的親子小遊戲。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffaf2",
+  "theme_color": "#6d4aff",
+  "lang": "zh-Hant"
+}
