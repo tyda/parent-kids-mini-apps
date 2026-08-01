@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5a4fcf" />
+  <meta name="description" content="輪流記住旅行箱裡的物品，再放進一件新東西的親子記憶遊戲。" />
+  <title>記憶旅行箱</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <a class="back" href="../../">← 回到工具合集</a>
+      <div class="title-row"><span aria-hidden="true">🧳</span><div><p class="eyebrow">安靜輪流玩</p><h1>記憶旅行箱</h1></div></div>
+      <p class="intro">記住箱子裡的東西，照順序說一遍，再選一件新物品放進去！</p>
+    </header>
+
+    <section id="setup" class="panel" aria-labelledby="setup-title">
+      <h2 id="setup-title">這次要裝幾件？</h2>
+      <div class="levels" role="group" aria-label="選擇遊戲長度">
+        <button class="level" data-goal="3"><strong>3 件</strong><span>約 3 分鐘</span></button>
+        <button class="level selected" data-goal="5"><strong>5 件</strong><span>約 5 分鐘</span></button>
+        <button class="level" data-goal="7"><strong>7 件</strong><span>記憶挑戰</span></button>
+      </div>
+      <button id="start" class="primary">開始收行李</button>
+      <details>
+        <summary>怎麼玩？</summary>
+        <ol>
+          <li>第一位先看箱內物品，按「蓋上箱子」。</li>
+          <li>不看螢幕，照順序把物品說出來。</li>
+          <li>打開檢查；說對了就挑一件新物品，再換人。</li>
+        </ol>
+        <p>忘記也沒關係，一起看答案再繼續，不計分、不淘汰。</p>
+      </details>
+    </section>
+
+    <section id="game" class="panel hidden" aria-live="polite">
+      <div class="progress-row"><span id="turn-label">第 1 位的回合</span><span id="progress">1 / 5 件</span></div>
+      <div class="meter" aria-hidden="true"><span id="meter-fill"></span></div>
+
+      <div id="look-stage">
+        <p class="instruction">先記住箱子裡的順序</p>
+        <ol id="suitcase" class="suitcase"></ol>
+        <button id="hide-items" class="primary">我記住了，蓋上箱子</button>
+      </div>
+
+      <div id="recall-stage" class="hidden">
+        <div class="closed-case" aria-hidden="true">🧳</div>
+        <h2>換你說說看</h2>
+        <p>不要偷看，從第一件開始照順序說出來。</p>
+        <button id="reveal" class="primary">說完了，打開檢查</button>
+      </div>
+
+      <div id="check-stage" class="hidden">
+        <p class="instruction">答案是：</p>
+        <ol id="answer" class="suitcase compact"></ol>
+        <h2 id="choice-title">選一件放進旅行箱</h2>
+        <div id="choices" class="choices"></div>
+        <button id="finish" class="primary hidden">全部記住了！</button>
+      </div>
+    </section>
+
+    <section id="result" class="panel result hidden" aria-live="polite">
+      <div class="celebrate" aria-hidden="true">✨🧳✨</div>
+      <h2>旅行箱收好啦！</h2>
+      <p id="result-copy"></p>
+      <ol id="final-list" class="suitcase compact"></ol>
+      <p id="best" class="best"></p>
+      <div class="result-actions">
+        <button id="again" class="primary">再玩一箱</button>
+        <button id="reset-record" class="secondary">清除最高紀錄</button>
+      </div>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
