@@ -4,6 +4,7 @@
 
 ## 目前工具
 
+- `apps/tiny-color-scouts/`：小小顏色搜查隊
 - `apps/tiny-adventure-dice/`：親子任務骰子
 - `apps/tiny-taxi-meter/`：小小計程車跳錶
 - `apps/tiny-sound-hunter/`：安靜聲音獵人
