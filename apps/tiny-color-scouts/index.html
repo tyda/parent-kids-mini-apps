@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#187b62" />
+  <meta name="description" content="抽出顏色觀察任務，輪流在身邊找線索，一起完成五回合。" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>小小顏色搜查隊</title>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <a class="back" href="../../">← 回到工具合集</a>
+      <p class="eyebrow">5–10 分鐘・安靜觀察・兩人合作</p>
+      <h1>🎨 小小顏色搜查隊</h1>
+      <p class="intro">抽一張顏色任務，在身邊找出符合線索的東西。找到後輪流說說看，不比快、一起完成！</p>
+    </header>
+
+    <section class="progress" aria-label="遊戲進度">
+      <span id="round-label">第 1 回合，共 5 回合</span>
+      <span id="badges" aria-hidden="true">○ ○ ○ ○ ○</span>
+    </section>
+
+    <section class="mission-card" aria-live="polite">
+      <p class="turn" id="turn-label">這回合由小朋友先找</p>
+      <div class="color-token" id="color-token"><span id="color-icon">●</span></div>
+      <p class="color-name" id="color-name">藍色</p>
+      <h2 id="mission-title">找一樣帶有這個顏色的東西</h2>
+      <p class="question" id="mission-question">它摸起來可能是硬的，還是軟的？</p>
+
+      <div class="finders" id="finders">
+        <button class="found-button" id="first-found" type="button">🧒 小朋友找到了</button>
+        <button class="found-button" id="second-found" type="button">🧑 大人找到了</button>
+      </div>
+      <p class="status" id="status" role="status">找到後按自己的按鈕，再互相分享答案。</p>
+      <button class="primary" id="next-round" type="button" disabled>兩人都找到，下一回合</button>
+    </section>
+
+    <section class="controls">
+      <button class="text-button" id="change-card" type="button">這張不好找，換一張</button>
+      <button class="text-button" id="restart" type="button">重新開始</button>
+    </section>
+
+    <section class="how-to">
+      <h2>怎麼玩</h2>
+      <ol>
+        <li>看本回合的<strong>顏色名稱與圖案</strong>，輪流在附近找東西。</li>
+        <li>找到後按自己的按鈕，說出物品，再回答卡片上的小問題。</li>
+        <li>兩人都找到就前進；完成 5 回合，全隊一起過關。</li>
+      </ol>
+      <p class="tip"><strong>安全提醒：</strong>搭車時只玩乘客看得到的範圍，不催駕駛找東西；走路時先停下來再看手機。找不到可以直接換卡，不扣分。</p>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

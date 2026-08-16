@@ -10,6 +10,8 @@
 - `apps/tiny-rhythm-train/`：手指節奏小火車
 - `apps/tiny-expression-detective/`：表情偵探社
 - `apps/tiny-one-line-drawing/`：一筆猜猜畫
+- `apps/tiny-memory-suitcase/`：記憶旅行箱
+- `apps/tiny-color-scouts/`：小小顏色搜查隊
 - `apps/tiny-clue-box/`：小乖米米的照片線索盒
 
 ## 部署
