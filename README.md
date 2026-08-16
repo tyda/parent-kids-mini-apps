@@ -9,7 +9,8 @@
 - `apps/tiny-sound-hunter/`：安靜聲音獵人
 - `apps/tiny-rhythm-train/`：手指節奏小火車
 - `apps/tiny-expression-detective/`：表情偵探社
-- `apps/tiny-clue-box/`：三條線索猜猜看
+- `apps/tiny-one-line-drawing/`：一筆猜猜畫
+- `apps/tiny-clue-box/`：小乖米米的照片線索盒
 
 ## 部署
 
@@ -24,4 +25,4 @@
 
 ## 隱私
 
-公開版不包含家庭成員姓名、私人稱呼或公司內部名稱。
+照片線索盒使用家長已明確核准的家庭照片與暱稱；照片嵌入前已移除 EXIF metadata。未核准素材不得加入 repository。

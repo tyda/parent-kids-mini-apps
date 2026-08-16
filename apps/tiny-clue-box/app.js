@@ -1,1 +1,148 @@
-(function(){'use strict';const TOTAL_ROUNDS=5,cards=[['🔴','找一個有明顯顏色的東西','選一個你們現在都看得到的物品。',['它最明顯是什麼顏色？','它的形狀像什麼？','它通常拿來做什麼？']],['🟡','找一個比手掌小的東西','不一定要拿起來。',['它比哪一根手指長或短？','它摸起來可能是硬的還是軟的？','它現在離我們多遠？']],['🟦','找一個有角或邊的東西','圓角也算。',['它大約有幾個角？','它有哪些直線或曲線？','如果它會說話，聲音會像什麼？']],['✨','找一個會反光的東西','看看哪裡有亮點。',['它反射了哪一種顏色？','它的表面平滑還是粗粗的？','你通常何時用到它？']],['🔘','找一個有按鈕或開關的東西','只用眼睛找，不必按。',['按鈕是什麼形狀？','按下去可能發生什麼？','誰最常使用它？']],['🧵','找一個軟軟的東西','用眼睛判斷就好。',['它看起來像哪種材質？','它可以折起來嗎？','它對我們有什麼幫助？']],['🔡','找一個上面有字的東西','數字或標誌也可以。',['上面的字大概有幾個？','字是什麼顏色？','這些字想告訴我們什麼？']],['⭕','找一個圓圓的東西','一小部分是圓的也算。',['它像哪種圓形食物？','它會滾動嗎？','它在什麼位置？']],['🌿','找一個讓你想到大自然的東西','顏色或圖案像也可以。',['它讓你想到哪個地方？','它像哪種動物或植物？','用一個天氣形容它。']],['🧩','找一個由很多小部分組成的東西','觀察重複的小零件。',['你看見哪些重複部分？','少一部分還能使用嗎？','它怎麼被組合起來？']]].map(([emoji,title,hint,clues])=>({emoji,title,hint,clues}));function pickDifferentIndex(n,p,r=Math.random){if(n<=1)return 0;let i=Math.floor(r()*n);return i===p?(i+1)%n:i}function roleForRound(r){return r%2?'玩家 1':'玩家 2'}function clueButtonLabel(s,t){return s>=t?'三條線索都出現了':`顯示第 ${s+1} 條線索`}if(typeof module!=='undefined')module.exports={TOTAL_ROUNDS,cards,pickDifferentIndex,roleForRound,clueButtonLabel};if(typeof document==='undefined')return;const $=id=>document.getElementById(id),choose=$('choose-stage'),clue=$('clue-stage'),finish=$('finish-stage'),next=$('next-clue'),solved=$('solved-button');let round=1,index=-1,shown=0;function show(){shown=0;$('clue-list').replaceChildren();next.disabled=false;next.textContent=clueButtonLabel(0,3);solved.classList.remove('visible');choose.hidden=false;clue.hidden=true;finish.hidden=true;$('round-label').textContent=`第 ${round} 回合，共 5 回合`;$('role-label').textContent=`出題員：${roleForRound(round)}`;index=pickDifferentIndex(cards.length,index);const c=cards[index];$('card-emoji').textContent=c.emoji;$('card-title').textContent=c.title;$('card-hint').textContent=c.hint}function reveal(){const c=cards[index];if(shown>=3)return;const p=document.createElement('p');p.className='clue';p.textContent=`線索 ${shown+1}　${c.clues[shown++]}`;$('clue-list').append(p);next.textContent=clueButtonLabel(shown,3);solved.classList.add('visible');next.disabled=shown===3}function advance(){if(++round>5){choose.hidden=clue.hidden=true;finish.hidden=false;$('round-label').textContent='完成 5 回合';$('role-label').textContent='合作成功！'}else show()}function reset(){round=1;index=-1;show()}$('ready-button').onclick=()=>{choose.hidden=true;clue.hidden=false;next.focus()};next.onclick=reveal;solved.onclick=advance;$('new-card').onclick=show;$('reset-button').onclick=reset;$('restart-button').onclick=reset;show();if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{})})();
+(function () {
+  'use strict';
+
+  const TOTAL_ROUNDS = 5;
+  const PLAYERS = ['小乖', '米米'];
+  const photos = [
+    { src: 'assets/family-01.webp', focus: '先看人物，再看身邊的小東西', clues: ['照片裡大約有幾個人？', '大家的表情或視線有什麼不同？', '人物旁邊最醒目的東西是什麼？'] },
+    { src: 'assets/family-02.webp', focus: '留意人物的位置和正在看的方向', clues: ['誰離鏡頭比較近？', '照片裡有哪些顏色最明顯？', '你覺得大家正在觀察什麼？'] },
+    { src: 'assets/family-03.webp', focus: '找找姿勢、表情和背景線索', clues: ['人物正在站著、坐著，還是在移動？', '臉上的表情讓你想到哪種心情？', '背景裡哪個形狀最容易認出來？'] },
+    { src: 'assets/family-04.webp', focus: '觀察手、臉和附近的物品', clues: ['人物的手正在做什麼？', '衣服上有什麼顏色或圖案？', '如果替照片配一句話，會說什麼？'] },
+    { src: 'assets/family-05.webp', focus: '找出這一刻正在進行的活動', clues: ['人物可能正在完成什麼小任務？', '畫面裡最小的東西可能是什麼？', '這個場景聽起來會安靜還是熱鬧？'] },
+    { src: 'assets/family-06.webp', focus: '用動作和物品來描述，不直接說答案', clues: ['人物的身體朝向哪裡？', '附近有哪個東西可能會被拿起來？', '這張照片最像一天中的哪個時段？'] },
+    { src: 'assets/family-07.webp', focus: '看看人物如何一起完成一件事', clues: ['照片裡的人靠得近還是遠？', '桌面或身邊有哪些線索？', '這一刻最可能聽到哪一句話？'] },
+    { src: 'assets/family-08.webp', focus: '從表情、衣服和背景猜是哪一張', clues: ['人物的表情比較專心、開心還是好奇？', '衣服上最明顯的顏色是什麼？', '背景中哪一件東西可以當最後提示？'] }
+  ];
+
+  function shuffleIndices(length, random = Math.random) {
+    const result = Array.from({ length }, (_, index) => index);
+    for (let i = result.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  function roleForRound(round) {
+    const giver = PLAYERS[(round - 1) % PLAYERS.length];
+    const guesser = PLAYERS[round % PLAYERS.length];
+    return { giver, guesser };
+  }
+
+  function clueButtonLabel(shown, total) {
+    return shown >= total ? '三條提示都出現了' : `顯示第 ${shown + 1} 條提示`;
+  }
+
+  if (typeof module !== 'undefined') {
+    module.exports = { TOTAL_ROUNDS, PLAYERS, photos, shuffleIndices, roleForRound, clueButtonLabel };
+  }
+  if (typeof document === 'undefined') return;
+
+  const $ = (id) => document.getElementById(id);
+  const chooseStage = $('choose-stage');
+  const clueStage = $('clue-stage');
+  const answerStage = $('answer-stage');
+  const finishStage = $('finish-stage');
+  const nextClueButton = $('next-clue');
+  const answerButton = $('answer-button');
+
+  let round = 1;
+  let shown = 0;
+  let deck = shuffleIndices(photos.length);
+
+  function currentPhoto() {
+    return photos[deck[round - 1]];
+  }
+
+  function setPhoto(elementId) {
+    const image = $(elementId);
+    image.src = currentPhoto().src;
+    image.alt = '本回合已核准的家庭照片';
+  }
+
+  function showRound() {
+    shown = 0;
+    const roles = roleForRound(round);
+    const photo = currentPhoto();
+
+    $('clue-list').replaceChildren();
+    nextClueButton.disabled = false;
+    nextClueButton.textContent = clueButtonLabel(0, photo.clues.length);
+    answerButton.hidden = true;
+    chooseStage.hidden = false;
+    clueStage.hidden = true;
+    answerStage.hidden = true;
+    finishStage.hidden = true;
+    $('round-label').textContent = `第 ${round} 回合，共 ${TOTAL_ROUNDS} 回合`;
+    $('role-label').textContent = `出題：${roles.giver}　猜題：${roles.guesser}`;
+    $('giver-name').textContent = roles.giver;
+    $('guesser-name').textContent = roles.guesser;
+    $('photo-focus').textContent = photo.focus;
+    setPhoto('photo-card');
+  }
+
+  function beginGuessing() {
+    chooseStage.hidden = true;
+    clueStage.hidden = false;
+    nextClueButton.focus();
+  }
+
+  function revealClue() {
+    const photo = currentPhoto();
+    if (shown >= photo.clues.length) return;
+    const item = document.createElement('p');
+    item.className = 'clue';
+    item.textContent = `提示 ${shown + 1}　${photo.clues[shown]}`;
+    shown += 1;
+    $('clue-list').append(item);
+    nextClueButton.textContent = clueButtonLabel(shown, photo.clues.length);
+    nextClueButton.disabled = shown === photo.clues.length;
+    answerButton.hidden = false;
+  }
+
+  function showAnswer() {
+    clueStage.hidden = true;
+    answerStage.hidden = false;
+    setPhoto('answer-photo');
+    $('next-round-button').focus();
+  }
+
+  function advance() {
+    round += 1;
+    if (round > TOTAL_ROUNDS) {
+      chooseStage.hidden = true;
+      clueStage.hidden = true;
+      answerStage.hidden = true;
+      finishStage.hidden = false;
+      $('round-label').textContent = `完成 ${TOTAL_ROUNDS} 回合`;
+      $('role-label').textContent = '小乖和米米合作成功！';
+      return;
+    }
+    showRound();
+  }
+
+  function swapPhoto() {
+    const currentPosition = round - 1;
+    if (currentPosition >= deck.length - 1) return;
+    const swapWith = currentPosition + 1 + Math.floor(Math.random() * (deck.length - currentPosition - 1));
+    [deck[currentPosition], deck[swapWith]] = [deck[swapWith], deck[currentPosition]];
+    showRound();
+  }
+
+  function reset() {
+    round = 1;
+    deck = shuffleIndices(photos.length);
+    showRound();
+  }
+
+  $('ready-button').addEventListener('click', beginGuessing);
+  nextClueButton.addEventListener('click', revealClue);
+  answerButton.addEventListener('click', showAnswer);
+  $('next-round-button').addEventListener('click', advance);
+  $('new-card').addEventListener('click', swapPhoto);
+  $('reset-button').addEventListener('click', reset);
+  $('restart-button').addEventListener('click', reset);
+
+  showRound();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+})();

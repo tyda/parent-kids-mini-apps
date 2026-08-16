@@ -1,1 +1,10 @@
-{"name":"三條線索猜猜看","short_name":"線索猜猜看","lang":"zh-Hant","start_url":"./","display":"standalone","background_color":"#effbf5","theme_color":"#0b766e"}
+{
+  "name": "小乖米米的照片線索盒",
+  "short_name": "照片線索盒",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#faefff",
+  "theme_color": "#7c3aed",
+  "lang": "zh-Hant",
+  "icons": []
+}

@@ -1,1 +1,73 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b766e"><meta name="description" content="輪流挑一個身邊物品，用三條線索讓對方猜，練習觀察與表達。"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./styles.css"><title>三條線索猜猜看</title></head><body><main class="shell"><header><a class="back" href="../../">← 回到工具合集</a><p class="eyebrow">5–10 分鐘・兩人輪流・低音量</p><h1>🧰 三條線索猜猜看</h1><p class="intro">出題員挑一個身邊看得到的東西，不說名字；猜題員聽三條線索來找答案。</p></header><section class="progress" aria-label="遊戲進度"><span id="round-label">第 1 回合，共 5 回合</span><span id="role-label">出題員：玩家 1</span></section><section class="game-card" aria-live="polite"><div id="choose-stage"><p class="step">出題員先看</p><span class="big-emoji" id="card-emoji">🔴</span><h2 id="card-title">找一個有顏色的東西</h2><p id="card-hint">選好後記住它，不要說出名字。</p><button id="ready-button" class="primary">我選好了，藏起題目</button></div><div id="clue-stage" hidden><p class="step">一次說一條線索</p><div class="clue-list" id="clue-list"></div><button id="next-clue" class="primary">顯示第 1 條線索</button><button id="solved-button" class="success">猜到了！下一回合</button></div><div id="finish-stage" hidden><span class="big-emoji">🎉</span><h2>五回合完成！</h2><p>你們一共交換了 15 條觀察線索。</p><button id="restart-button" class="primary">再玩一次</button></div></section><section class="how-to"><h2>怎麼玩</h2><ol><li><strong>偷偷選：</strong>照卡片提示，挑一個附近看得到的東西。</li><li><strong>慢慢說：</strong>把手機交給猜題員，每按一次就出現一個線索方向。</li><li><strong>交換角色：</strong>猜到或三條線索說完，就按「下一回合」。</li></ol><p class="tip">找不到也可以換卡；搭車時只觀察車內，請不要解開安全帶。</p><button id="new-card" class="text-button">這題不適合，換一張</button><button id="reset-button" class="text-button">重新開始</button></section></main><script src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#7c3aed">
+  <meta name="description" content="小乖和米米輪流看家庭照片、藏起畫面，再用三條提示讓對方猜。">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>小乖米米的照片線索盒</title>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <a class="back" href="../../">← 回到工具合集</a>
+      <p class="eyebrow">5–10 分鐘・兩人輪流・家庭照片</p>
+      <h1>📷 小乖米米的照片線索盒</h1>
+      <p class="intro">出題的人偷偷看一張家庭照片，再把照片藏起來；猜題的人聽三條提示，猜是哪一個回憶。</p>
+    </header>
+
+    <section class="progress" aria-label="遊戲進度">
+      <span id="round-label">第 1 回合，共 5 回合</span>
+      <span id="role-label">出題：小乖　猜題：米米</span>
+    </section>
+
+    <section class="game-card" aria-live="polite">
+      <div id="choose-stage">
+        <p class="step"><strong id="giver-name">小乖</strong> 先偷偷看</p>
+        <img id="photo-card" class="family-photo" src="./assets/family-01.webp" alt="本回合已核准的家庭照片">
+        <h2>記住照片中的線索</h2>
+        <p id="photo-focus">先看人物，再看身邊的小東西</p>
+        <button id="ready-button" class="primary">我看好了，藏起照片</button>
+        <button id="new-card" class="text-button">這張想換掉</button>
+      </div>
+
+      <div id="clue-stage" hidden>
+        <p class="step">輪到 <strong id="guesser-name">米米</strong> 猜</p>
+        <div class="photo-hidden" aria-hidden="true">🙈<span>照片藏起來了</span></div>
+        <div class="clue-list" id="clue-list"></div>
+        <button id="next-clue" class="primary">顯示第 1 條提示</button>
+        <button id="answer-button" class="success" hidden>揭曉照片</button>
+      </div>
+
+      <div id="answer-stage" hidden>
+        <p class="step">答案揭曉</p>
+        <img id="answer-photo" class="family-photo" src="./assets/family-01.webp" alt="本回合已核准的家庭照片">
+        <h2>就是這一張！</h2>
+        <p>一起說說：你最先想到的是哪個線索？</p>
+        <button id="next-round-button" class="primary">下一回合，交換角色</button>
+      </div>
+
+      <div id="finish-stage" hidden>
+        <span class="big-emoji">🎉</span>
+        <h2>五回合完成！</h2>
+        <p>小乖和米米一起把家庭回憶變成了線索。</p>
+        <button id="restart-button" class="primary">再玩一次</button>
+      </div>
+    </section>
+
+    <section class="how-to">
+      <h2>怎麼玩</h2>
+      <ol>
+        <li><strong>偷偷看：</strong>只有出題的人看照片，記住人物、表情、動作和背景。</li>
+        <li><strong>藏起來：</strong>按下按鈕後把手機交給猜題的人，再逐條顯示提示方向。</li>
+        <li><strong>一起揭曉：</strong>猜到後看答案，下一回合由小乖、米米交換角色。</li>
+      </ol>
+      <p class="tip">照片皆為家長已核准素材，嵌入前已移除 EXIF metadata。</p>
+      <button id="reset-button" class="text-button">重新開始</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

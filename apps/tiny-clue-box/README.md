@@ -1,7 +1,15 @@
-# 三條線索猜猜看
+# 小乖米米的照片線索盒
 
-五回合、5–10 分鐘的低音量觀察遊戲。輪流挑一個附近物品，用三條提示讓對方猜。支援手機直向與橫向，無外部依賴。
+適合手機使用的五回合家庭照片猜題遊戲。小乖與米米輪流當出題者：先偷偷看照片、藏起畫面，再依三條提示方向描述，讓另一位猜是哪個回憶。
 
-執行：`python3 -m http.server 8000`
+## 隱私
 
-測試：`node apps/tiny-clue-box/test-core.js`
+- 8 張素材均經家長在 Google Photos Picker 中逐張選取並再次核准。
+- Repository 只收錄縮放後的 WebP；轉檔時已移除 EXIF metadata。
+- 不包含 Google Photos token、原始檔名、Picker session ID 或相簿連結。
+
+## 驗證
+
+```bash
+node test-core.js
+```
