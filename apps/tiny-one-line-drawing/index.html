@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#6d4aff" />
+  <title>一筆猜猜畫</title>
+  <meta name="description" content="輪流在手機上畫簡單題目，讓對方猜答案的五回合親子小遊戲。" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <a class="back" href="../../">← 回到工具合集</a>
+    <header>
+      <p class="eyebrow">安靜畫畫 · 兩人輪流 · 約 5–10 分鐘</p>
+      <h1>✏️ 一筆猜猜畫</h1>
+      <p class="intro">畫的人偷看題目，再把手機交給猜的人。只能畫圖，不寫字，也不要說出答案！</p>
+    </header>
+
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title">怎麼玩</h2>
+      <ol>
+        <li>畫家偷看題目，按「藏好題目」。</li>
+        <li>用手指在畫板畫，讓另一人猜。</li>
+        <li>猜到就得一顆星；每回合交換角色。</li>
+      </ol>
+    </section>
+
+    <section class="status" aria-live="polite">
+      <strong id="round-label">第 1 回合，共 5 回合</strong>
+      <span id="stars" aria-label="目前得分">☆ ☆ ☆ ☆ ☆</span>
+    </section>
+
+    <section id="prompt-panel" class="panel prompt-panel">
+      <p class="role" id="role-label">本回合畫家先偷看</p>
+      <div class="secret-card">
+        <span id="prompt-emoji" aria-hidden="true">☂️</span>
+        <div>
+          <small>請畫出</small>
+          <h2 id="prompt-word">雨傘</h2>
+          <p id="prompt-tip">提示：先畫大形狀，再補一個特徵。</p>
+        </div>
+      </div>
+      <button class="primary" id="start-drawing" type="button">🙈 藏好題目，開始畫</button>
+      <button class="text-button" id="change-prompt" type="button">換一題</button>
+    </section>
+
+    <section id="drawing-panel" class="panel drawing-panel" hidden>
+      <div class="drawing-head">
+        <div>
+          <p class="role">猜的人請看畫板</p>
+          <strong id="timer-label">還有 30 秒</strong>
+        </div>
+        <button class="timer-toggle" id="timer-toggle" type="button" aria-pressed="false">暫停計時</button>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="drawing-canvas" aria-label="手指繪圖區"></canvas>
+        <p id="canvas-hint">用手指在這裡畫</p>
+      </div>
+      <div class="tools" aria-label="畫筆工具">
+        <button id="pen" class="tool active" type="button" aria-pressed="true">✏️ 畫筆</button>
+        <button id="eraser" class="tool" type="button" aria-pressed="false">⬜ 橡皮擦</button>
+        <button id="clear" class="tool" type="button">清空</button>
+      </div>
+      <div class="actions">
+        <button class="success" id="guessed" type="button">🎉 猜到了</button>
+        <button class="secondary" id="reveal" type="button">看答案</button>
+      </div>
+      <div id="answer-panel" class="answer" hidden>
+        答案是：<strong id="answer-word"></strong>
+        <button id="not-guessed" type="button">這題先跳過</button>
+      </div>
+    </section>
+
+    <section id="finish-panel" class="panel finish" hidden>
+      <span aria-hidden="true">🏆</span>
+      <h2>五回合完成！</h2>
+      <p id="finish-message"></p>
+      <button class="primary" id="restart" type="button">再玩一次</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
