@@ -1,0 +1,11 @@
+{
+  "name": "小小顏色搜查隊",
+  "short_name": "顏色搜查隊",
+  "description": "親子輪流找顏色線索的安靜合作遊戲",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff9e9",
+  "theme_color": "#187b62",
+  "icons": []
+}

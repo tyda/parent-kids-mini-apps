@@ -1,0 +1,12 @@
+{
+  "name": "記憶旅行箱",
+  "short_name": "記憶旅行箱",
+  "description": "輪流記住物品順序，再加入一件新東西的親子記憶遊戲。",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f0ff",
+  "theme_color": "#5a4fcf",
+  "icons": []
+}
