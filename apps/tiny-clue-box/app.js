@@ -39,6 +39,7 @@
   if (typeof document === 'undefined') return;
 
   const $ = (id) => document.getElementById(id);
+  const coverStage = $('cover-stage');
   const chooseStage = $('choose-stage');
   const clueStage = $('clue-stage');
   const answerStage = $('answer-stage');
@@ -57,10 +58,22 @@
   function setPhoto(elementId) {
     const image = $(elementId);
     image.src = currentPhoto().src;
-    image.alt = '本回合已核准的家庭照片';
+    image.alt = '本回合題目照片';
   }
 
-  function showRound() {
+  function clearPhoto(elementId) {
+    $(elementId).removeAttribute('src');
+  }
+
+  function announce(message) {
+    $('status-message').textContent = message;
+  }
+
+  function focusHeading(elementId) {
+    $(elementId).focus({ preventScroll: true });
+  }
+
+  function showRound(shouldFocus = false) {
     shown = 0;
     const roles = roleForRound(round);
     const photo = currentPhoto();
@@ -69,22 +82,38 @@
     nextClueButton.disabled = false;
     nextClueButton.textContent = clueButtonLabel(0, photo.clues.length);
     answerButton.hidden = true;
-    chooseStage.hidden = false;
+    coverStage.hidden = false;
+    chooseStage.hidden = true;
     clueStage.hidden = true;
     answerStage.hidden = true;
     finishStage.hidden = true;
     $('round-label').textContent = `第 ${round} 回合，共 ${TOTAL_ROUNDS} 回合`;
     $('role-label').textContent = `出題：${roles.giver}　猜題：${roles.guesser}`;
+    $('cover-title').textContent = `請 ${roles.guesser} 先移開視線`;
+    $('show-photo-button').textContent = `只有 ${roles.giver} 在看，顯示照片`;
     $('giver-name').textContent = roles.giver;
     $('guesser-name').textContent = roles.guesser;
     $('photo-focus').textContent = photo.focus;
+    clearPhoto('photo-card');
+    clearPhoto('answer-photo');
+    announce(`第 ${round} 回合，請 ${roles.guesser} 先移開視線`);
+    if (shouldFocus) focusHeading('cover-title');
+  }
+
+  function showPhoto() {
+    coverStage.hidden = true;
+    chooseStage.hidden = false;
     setPhoto('photo-card');
+    announce('題目照片已顯示，只能讓出題者觀看');
+    focusHeading('photo-title');
   }
 
   function beginGuessing() {
+    clearPhoto('photo-card');
     chooseStage.hidden = true;
     clueStage.hidden = false;
-    nextClueButton.focus();
+    announce('照片已藏起，現在可以把裝置交給猜題者');
+    focusHeading('clue-title');
   }
 
   function revealClue() {
@@ -104,21 +133,26 @@
     clueStage.hidden = true;
     answerStage.hidden = false;
     setPhoto('answer-photo');
-    $('next-round-button').focus();
+    announce('照片答案已揭曉');
+    focusHeading('answer-title');
   }
 
   function advance() {
     round += 1;
     if (round > TOTAL_ROUNDS) {
+      coverStage.hidden = true;
       chooseStage.hidden = true;
       clueStage.hidden = true;
       answerStage.hidden = true;
       finishStage.hidden = false;
       $('round-label').textContent = `完成 ${TOTAL_ROUNDS} 回合`;
       $('role-label').textContent = '小乖和米米合作成功！';
+      clearPhoto('answer-photo');
+      announce('五回合完成，小乖和米米合作成功');
+      focusHeading('finish-title');
       return;
     }
-    showRound();
+    showRound(true);
   }
 
   function swapPhoto() {
@@ -126,15 +160,16 @@
     if (currentPosition >= deck.length - 1) return;
     const swapWith = currentPosition + 1 + Math.floor(Math.random() * (deck.length - currentPosition - 1));
     [deck[currentPosition], deck[swapWith]] = [deck[swapWith], deck[currentPosition]];
-    showRound();
+    showRound(true);
   }
 
   function reset() {
     round = 1;
     deck = shuffleIndices(photos.length);
-    showRound();
+    showRound(true);
   }
 
+  $('show-photo-button').addEventListener('click', showPhoto);
   $('ready-button').addEventListener('click', beginGuessing);
   nextClueButton.addEventListener('click', revealClue);
   answerButton.addEventListener('click', showAnswer);
@@ -144,5 +179,8 @@
   $('restart-button').addEventListener('click', reset);
 
   showRound();
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) showRound();
+  });
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
 })();
