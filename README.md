@@ -13,13 +13,13 @@
 - `apps/tiny-memory-suitcase/`：記憶旅行箱
 - `apps/tiny-color-scouts/`：小小顏色搜查隊
 
-## 部署
+## 正式部署
 
-這是純靜態網站，可以直接用 Vercel 匯入 GitHub repository 部署。
+- 正式網址：<https://xn--kdw.tw/kids/>
+- `https://xn--kdw.tw/` 保留既有 Cloud Lab 首頁。
+- 網站由班班 VPS 的 Nginx／Traefik 提供，部署內容為 `main` 的純靜態 runtime 檔案。
+- 舊 Vercel 網址僅作遷移轉址，所有路徑會永久導向 `https://xn--kdw.tw/kids/` 下的對應路徑。
 
-建議 Vercel 設定：
+## 隱私
 
-- Framework Preset：Other
-- Build Command：留空
-- Output Directory：留空或 `.`
-- Production Branch：`main`
+公開版本不得包含小朋友或家庭真實照片、Picker 下載檔、候選圖、EXIF、相簿來源資訊或相關憑證。親子工具若需個人照片，只能採瀏覽器端當次選取且不離開裝置的設計。
