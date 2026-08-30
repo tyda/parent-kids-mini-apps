@@ -20,6 +20,16 @@
 - 網站由班班 VPS 的 Nginx／Traefik 提供，部署內容為 `main` 的純靜態 runtime 檔案。
 - 舊 Vercel 網址僅作遷移轉址，所有路徑會永久導向 `https://xn--kdw.tw/kids/` 下的對應路徑。
 
+## 每週小工具開發流程
+
+1. 每週六從最新 `main` 建立新的功能分支。
+2. 完成功能後執行全部小工具測試、JavaScript 語法檢查、靜態路徑檢查及隱私掃描。
+3. 建立 GitHub PR，等待思評審查與 merge；PR 不會部署正式站。
+4. PR merge 至 `main` 後，GitHub Actions 自動建立隱私安全的 runtime archive。
+5. 以限權 SSH 帳號上傳至 VPS，完成 release 原子切換後，驗證 `https://xn--kdw.tw/kids/` 的首頁、CSS、8 個工具及照片 404。
+
+部署 workflow：`.github/workflows/deploy-vps.yml`；runtime builder：`scripts/build_vps_runtime.py`。
+
 ## 隱私
 
 公開版本不得包含小朋友或家庭真實照片、Picker 下載檔、候選圖、EXIF、相簿來源資訊或相關憑證。親子工具若需個人照片，只能採瀏覽器端當次選取且不離開裝置的設計。
