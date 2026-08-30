@@ -1,0 +1,93 @@
+name: Deploy kids site to VPS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - styles.css
+      - apps/**
+      - scripts/build_vps_runtime.py
+      - .github/workflows/deploy-vps.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: parent-kids-vps-production
+  cancel-in-progress: false
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run all app tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          for test_file in apps/*/test-core.js; do
+            node "$test_file"
+          done
+
+      - name: Build privacy-safe runtime archive
+        run: python3 scripts/build_vps_runtime.py
+
+      - name: Configure SSH
+        shell: bash
+        env:
+          VPS_SSH_KEY_B64: ${{ secrets.VPS_SSH_KEY_B64 }}
+          VPS_KNOWN_HOSTS_B64: ${{ secrets.VPS_KNOWN_HOSTS_B64 }}
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s' "$VPS_SSH_KEY_B64" | base64 --decode > ~/.ssh/id_ed25519
+          printf '%s' "$VPS_KNOWN_HOSTS_B64" | base64 --decode > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+
+      - name: Upload and atomically activate release
+        shell: bash
+        env:
+          VPS_HOST: ${{ vars.VPS_HOST }}
+          VPS_USER: ${{ vars.VPS_USER }}
+        run: |
+          set -euo pipefail
+          archive="dist/parent-kids-mini-apps-runtime.tar.gz"
+          remote_archive="/opt/kids-app/incoming/${GITHUB_SHA}.tar.gz"
+          scp "$archive" "${VPS_USER}@${VPS_HOST}:${remote_archive}"
+          ssh "${VPS_USER}@${VPS_HOST}" "set -euo pipefail
+            release='/opt/kids-app/releases/${GITHUB_SHA}'
+            rm -rf \"\$release\"
+            mkdir -p \"\$release\"
+            tar -xzf '${remote_archive}' -C \"\$release\"
+            test -f \"\$release/index.html\"
+            test -f \"\$release/styles.css\"
+            test ! -e \"\$release/apps/tiny-clue-box\"
+            chmod -R a+rX \"\$release\"
+            ln -sfn 'releases/${GITHUB_SHA}' /opt/kids-app/current.new
+            mv -Tf /opt/kids-app/current.new /opt/kids-app/current
+            rm -f '${remote_archive}'
+          "
+
+      - name: Verify production deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://xn--kdw.tw/kids'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/")" = '200'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/styles.css")" = '200'
+          for app in apps/*; do
+            slug="$(basename "$app")"
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/")" = '200'
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/app.js")" = '200'
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/styles.css")" = '200'
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/sw.js")" = '200'
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/manifest.webmanifest")" = '200'
+          done
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/tiny-clue-box/")" = '404'
+          for i in $(seq -w 1 9); do
+            test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/tiny-clue-box/assets/family-$i.webp")" = '404'
+          done
