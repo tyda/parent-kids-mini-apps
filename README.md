@@ -12,7 +12,6 @@
 - `apps/tiny-one-line-drawing/`：一筆猜猜畫
 - `apps/tiny-memory-suitcase/`：記憶旅行箱
 - `apps/tiny-color-scouts/`：小小顏色搜查隊
-- `apps/tiny-clue-box/`：小乖米米的照片線索盒
 
 ## 部署
 
@@ -24,7 +23,3 @@
 - Build Command：留空
 - Output Directory：留空或 `.`
 - Production Branch：`main`
-
-## 隱私
-
-照片線索盒使用家長已明確核准的家庭照片與暱稱；照片嵌入前已移除 EXIF metadata。未核准素材不得加入 repository。
