@@ -18,7 +18,6 @@
 - 正式網址：<https://xn--kdw.tw/kids/>
 - `https://xn--kdw.tw/` 保留既有 Cloud Lab 首頁。
 - 網站由班班 VPS 的 Nginx／Traefik 提供，部署內容為 `main` 的純靜態 runtime 檔案。
-- 舊 Vercel 網址僅作遷移轉址，所有路徑會永久導向 `https://xn--kdw.tw/kids/` 下的對應路徑。
 
 ## 每週小工具開發流程
 
