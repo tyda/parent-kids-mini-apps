@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#254c48">
+<title>口袋博物館｜親子小工具</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="manifest" href="./manifest.webmanifest">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<main>
+<a href="../../">← 回小工具合集</a>
+<header><p class="eyebrow">🏛️ 5–15 分鐘 · 想像力 × 表達 · 兩人以上</p><h1>口袋博物館</h1><p>普通小物，也能收藏不普通的故事。</p></header>
+<details open><summary>怎麼玩？先讀這裡</summary><ol><li>輪流當館長，依照展廳主題，從圖卡選出 <strong>3 件展品</strong>。</li><li>館長說「我選它，因為……」。訪客問「它有什麼特別用途？」不用猜標準答案！</li><li>聊完按「換人策展」，完成 5 間展廳後一起看展。</li></ol><p>例如：把襪子當小龍睡袋、貝殼當枕頭。可以指圖讓大人代說；不用找實物、不用走動，駕駛請勿操作。</p></details>
+<section class="exhibition" aria-label="策展區">
+<p id="progress"></p><h2 id="theme" tabindex="-1"></h2>
+<p id="status" role="status" aria-live="polite"></p>
+<div id="play"><div id="items" class="items" role="group" aria-label="展品圖卡，選三件"></div><p class="prompt">💬 館長說理由 → 訪客問問題 → 一起想像答案</p><button id="next" type="button" class="primary" disabled>聊好了，換人策展</button></div>
+<div id="gallery" hidden></div>
+</section>
+<button id="restart" type="button" class="restart">重新抽題／清空展覽</button>
+<p id="offline" class="note">不需登入、不拍照、不上傳。展覽只在本次頁面中，重整即清空；首次連線載入後可離線再玩。</p>
+<noscript>此工具需要啟用 JavaScript 才能選展品。</noscript>
+</main>
+</body>
+</html>

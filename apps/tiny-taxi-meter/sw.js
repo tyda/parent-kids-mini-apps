@@ -1,4 +1,4 @@
-const CACHE = 'taxi-meter-kids-v8-aidc';
+const CACHE = 'taxi-meter-kids-v9-public';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest'];
 
 self.addEventListener('install', event => {
