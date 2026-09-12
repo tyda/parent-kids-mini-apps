@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101b3f" />
+  <meta name="description" content="一人記住安全航線、一人操作太空船的親子合作遊戲。" />
+  <title>星際導航密語</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <a class="back" href="../../">← 回工具合集</a>
+      <p class="eyebrow">親子合作 · 5–10 分鐘</p>
+      <h1>🚀 星際導航密語</h1>
+      <p>導航員先記住隕石位置，再把手機交給駕駛員，用「上、下、左、右」帶太空船回家。</p>
+    </header>
+
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title">怎麼玩</h2>
+      <ol>
+        <li><strong>導航員看地圖</strong>：一起找出避開隕石的路。</li>
+        <li><strong>按「藏起隕石」</strong>：把手機交給駕駛員。</li>
+        <li><strong>只用方向密語</strong>：導航員不能指螢幕，駕駛員按方向鍵；完成後交換角色。</li>
+      </ol>
+    </section>
+
+    <section class="game" aria-label="星際任務">
+      <div class="status-row">
+        <span id="missionLabel">任務 1 / 3</span>
+        <span id="shieldLabel">護盾 ❤️❤️</span>
+      </div>
+      <p id="rolePrompt" class="prompt" role="status" aria-live="polite">導航員，先記住安全航線！</p>
+      <div id="board" class="board" role="grid" aria-label="太空航行地圖"></div>
+      <p class="legend"><span>🚀 太空船</span><span>🪨 隕石</span><span>🌟 太空站</span></p>
+
+      <div class="actions">
+        <button id="hideButton" class="primary" type="button">🙈 記好了，藏起隕石</button>
+        <button id="showButton" class="secondary hidden" type="button">👀 偷看 3 秒</button>
+      </div>
+
+      <div id="controls" class="controls hidden" aria-label="方向控制">
+        <button type="button" data-direction="up" aria-label="向上">↑</button>
+        <button type="button" data-direction="left" aria-label="向左">←</button>
+        <button type="button" data-direction="down" aria-label="向下">↓</button>
+        <button type="button" data-direction="right" aria-label="向右">→</button>
+      </div>
+      <button id="nextButton" class="primary hidden" type="button">下一個任務，交換角色 →</button>
+      <button id="restartButton" class="secondary" type="button">重新開始</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

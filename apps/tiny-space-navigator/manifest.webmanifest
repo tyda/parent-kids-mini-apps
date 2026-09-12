@@ -1,0 +1,11 @@
+{
+  "name": "星際導航密語",
+  "short_name": "星際導航",
+  "description": "親子合作記憶航線與方向表達遊戲",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080e25",
+  "theme_color": "#101b3f"
+}
