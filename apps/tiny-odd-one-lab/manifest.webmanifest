@@ -1,0 +1,12 @@
+{
+  "name": "怪怪分類研究所",
+  "short_name": "分類研究所",
+  "description": "找出四張圖卡裡最不一樣的一張，親子一起說出分類理由。",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffaf0",
+  "theme_color": "#5b3f91",
+  "icons": []
+}
