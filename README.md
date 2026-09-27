@@ -4,6 +4,7 @@
 
 ## 目前工具
 
+- `apps/tiny-odd-one-lab/`：怪怪分類研究所
 - `apps/tiny-space-navigator/`：星際導航密語
 - `apps/tiny-pocket-museum/`：口袋博物館
 - `apps/tiny-adventure-dice/`：親子任務骰子

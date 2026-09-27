@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b3f91" />
+  <meta name="description" content="從四張圖卡找出最不一樣的一個，再一起說出理由的親子觀察遊戲。" />
+  <title>怪怪分類研究所</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <a class="back" href="../../">← 回工具合集</a>
+      <p class="eyebrow">親子討論 · 5–10 分鐘</p>
+      <h1>🔬 怪怪分類研究所</h1>
+      <p>四張圖卡裡，誰最不一樣？先選一張，再說出你的理由。答案不只一種，說得通就算成功！</p>
+    </header>
+
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title">怎麼玩</h2>
+      <ol>
+        <li><strong>輪流選圖卡</strong>：找出你覺得最不一樣的一張。</li>
+        <li><strong>說出理由</strong>：例如「它不能吃」或「只有它會飛」。</li>
+        <li><strong>一起驗證</strong>：看研究所的參考線索；若還想到另一種分類，再加一顆星。</li>
+      </ol>
+    </section>
+
+    <section class="game" aria-label="分類遊戲">
+      <div class="status-row">
+        <span id="roundLabel">第 1 / 6 題</span>
+        <span id="starLabel" aria-label="目前獲得零顆理由星">理由星 ☆☆☆☆☆☆☆☆☆☆☆☆</span>
+      </div>
+      <p id="turnLabel" class="turn">這題請「小小研究員」先選</p>
+      <h2 id="question">哪一張最不一樣？</h2>
+      <div id="choices" class="choices" role="group" aria-labelledby="question"></div>
+
+      <section id="reasonPanel" class="reason-panel hidden" aria-live="polite">
+        <p id="pickMessage" class="pick-message"></p>
+        <div class="clue">
+          <span aria-hidden="true">💡</span>
+          <p><strong>研究所的參考線索</strong><br /><span id="officialReason"></span></p>
+        </div>
+        <p class="open-answer">你選別張也可能有道理。重點是把分類方法說清楚。</p>
+        <div class="reason-actions">
+          <button id="reasonButton" class="primary" type="button">⭐ 理由說完了</button>
+          <button id="extraButton" class="secondary" type="button">✨ 又想到另一種分法</button>
+        </div>
+        <button id="nextButton" class="next" type="button" disabled>下一題，交換先選的人 →</button>
+      </section>
+
+      <section id="finishPanel" class="finish hidden" aria-live="polite">
+        <span class="finish-icon">🏆</span>
+        <h2>分類研究完成！</h2>
+        <p id="finishMessage"></p>
+        <p>最後挑一題，試著找出第三種分法。怪一點也沒關係，講得通最重要。</p>
+        <button id="playAgainButton" class="primary" type="button">再玩一組新題目</button>
+      </section>
+
+      <button id="restartButton" class="text-button" type="button">重新開始這一局</button>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
