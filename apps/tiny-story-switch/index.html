@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#243956">
+  <meta name="description" content="親子輪流選但是與幸好，把六個轉折接成一個故事。">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>但是／幸好故事接力</title>
+</head>
+<body>
+  <main>
+    <a href="../../" class="back">← 回小工具合集</a>
+    <header><span class="eyebrow">安靜玩 · 約 5–10 分鐘</span><h1>但是／幸好<br>故事接力</h1><p>一人一句，把麻煩變成驚喜。沒有標準答案，講得通就是好故事。</p></header>
+    <section class="how" aria-label="怎麼玩"><h2>怎麼玩</h2><ol><li>按「開始故事」，一起讀開頭。</li><li>孩子和大人輪流：先猜後續，再點一張卡；選卡的人可以加一句自己的想法。</li><li>選完六句，一起讀出完整故事。想重玩就按「再玩一個新故事」。</li></ol></section>
+    <button id="start" class="start" type="button">開始故事</button>
+    <section class="game" aria-live="polite"><h2 id="progress">準備好就開始</h2><div id="story" class="story"></div><p id="prompt">這個故事會由你們兩個一起決定。</p><div id="options" class="options"></div></section>
+    <p class="privacy">純前端遊戲：不需帳號、不上傳、不儲存故事。離開頁面後本局不保留。</p>
+  </main>
+  <script src="./app.js" defer></script>
+</body>
+</html>
