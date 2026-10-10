@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#174a62">
+  <meta name="description" content="輪流旋轉橋塊，把左岸和右岸連起來的親子小遊戲。">
+  <title>小小橋樑工程師</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <a class="back" href="../../">← 回小工具合集</a>
+    <header><p class="eyebrow">安靜動腦 · 5–15 分鐘</p><h1>🌉 小小橋樑工程師</h1><p>橋塊歪掉了！一起把左岸的橋接到右岸。</p></header>
+    <section class="how" aria-labelledby="how-title">
+      <h2 id="how-title">怎麼玩</h2>
+      <ol><li>一人先點一個方塊，讓橋面旋轉。</li><li>換另一人點：橋面要從左岸入口一路接到右岸出口；接通就過關。</li><li>完成一座換人先手，共有五座橋。不知道轉哪裡就點「給我線索」。</li></ol>
+    </section>
+    <section class="game" aria-label="橋樑旋轉遊戲">
+      <p id="levelText" class="level"></p>
+      <div class="river"><span class="shore" aria-label="左岸入口">起點<br>➡</span><div id="board" class="board" role="group" aria-label="四乘四橋塊，點格子旋轉"></div><span class="shore" aria-label="右岸出口">終點<br>🏁</span></div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <div class="actions"><button id="hintButton" type="button">💡 給我線索</button><button id="nextButton" type="button" hidden>下一座橋 →</button></div>
+      <button id="restartButton" class="restart" type="button">從第一座重新開始</button>
+    </section>
+    <p class="privacy">無帳號、無照片、不上傳；離線開啟也能玩。</p>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
