@@ -1,0 +1,30 @@
+"use strict";
+const assert = require("node:assert/strict");
+const {CATEGORIES, createGame, select, reveal, nextAct, progress} = require("./app.js");
+assert.deepEqual(Object.keys(CATEGORIES), ["角色", "地點", "道具"]);
+for (const items of Object.values(CATEGORIES)) assert.ok(items.length >= 4);
+let game = createGame();
+assert.equal(progress(game), "第 1 幕／共 3 幕");
+assert.equal(reveal(game), game, "incomplete stage cannot reveal");
+assert.equal(nextAct(game), game, "cannot skip a stage");
+for (const [category, items] of Object.entries(CATEGORIES)) game = select(game, category, items[0].id);
+assert.equal(game.picks.角色, CATEGORIES.角色[0].id);
+assert.throws(() => select(game, "角色", "invalid"), RangeError);
+assert.throws(() => select(game, "invalid", "anything"), RangeError);
+game = reveal(game);
+assert.equal(game.revealed, true);
+assert.equal(select(game, "角色", CATEGORIES.角色[1].id), game, "revealed scene is locked");
+game = nextAct(game);
+assert.equal(game.act, 2);
+assert.deepEqual(game.picks, {});
+for (let act = 2; act <= 3; act++) {
+  for (const [category, items] of Object.entries(CATEGORIES)) game = select(game, category, items[act - 1].id);
+  game = reveal(game);
+  game = nextAct(game);
+}
+assert.equal(game.finished, true);
+assert.equal(game.act, 3);
+assert.equal(progress(game), "三幕完成！");
+assert.equal(nextAct(game), game);
+assert.notEqual(createGame(), game);
+console.log("tiny-shadow-theater core tests: PASS");

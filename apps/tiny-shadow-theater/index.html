@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182440">
+  <meta name="description" content="選三張圖卡，猜影子，揭曉後一起說故事。">
+  <title>小小影子劇場</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../../">← 回工具合集</a>
+  <header><span class="tag">安靜遊玩 · 免登入 · 三幕</span><h1>🎭 小小影子劇場</h1><p>出題者選三張圖卡，換人看影子猜答案；揭曉後一起接一句故事。</p></header>
+  <section class="guide" aria-label="怎麼玩"><h2>怎麼玩</h2><ol><li>出題的人選角色、地點、道具各一張。</li><li>按「交給猜的人」再把手機交給對方，先猜影子。</li><li>按「揭曉答案」，一起說故事；三幕完成就過關。</li></ol><p>小提醒：影子是 emoji 剪影，輪廓可能因手機字型不同；猜不出來也可以直接揭曉。</p></section>
+  <p id="progress" class="progress" aria-live="polite"></p>
+  <p id="hint" class="hint" aria-live="polite"></p>
+  <div id="picker"><div id="groups"></div><button id="handoff" class="primary" type="button">交給猜的人 →</button></div>
+  <section id="stage" hidden aria-label="影子舞台"><div id="shadows" class="shadows"></div><p id="story" class="story" aria-live="polite"></p><button id="edit" type="button">← 返回換卡</button><button id="reveal" class="primary" type="button">揭曉答案</button><button id="next" class="primary" type="button">下一幕 →</button></section>
+  <p id="done" class="done" hidden>🎉 三幕完成！換一位出題，再玩一次吧。</p>
+  <button id="restart" class="reset" type="button">重新開始三幕</button>
+</main>
+</body>
+</html>

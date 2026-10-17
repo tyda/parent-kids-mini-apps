@@ -4,6 +4,7 @@
 
 ## 目前工具
 
+- `apps/tiny-shadow-theater/`：小小影子劇場（選三張卡、輪流猜影子、接故事）
 - `apps/tiny-bridge-builder/`：小小橋樑工程師（輪流旋轉橋塊、連通兩岸）
 - `apps/tiny-odd-one-lab/`：怪怪分類研究所
 - `apps/tiny-space-navigator/`：星際導航密語
