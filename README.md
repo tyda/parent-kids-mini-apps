@@ -4,6 +4,7 @@
 
 ## 目前工具
 
+- `apps/tiny-secret-signal/`：小小暗號電台（輪流編碼燈號暗號、對照密碼本解碼）
 - `apps/tiny-shadow-theater/`：小小影子劇場（選三張卡、輪流猜影子、接故事）
 - `apps/tiny-bridge-builder/`：小小橋樑工程師（輪流旋轉橋塊、連通兩岸）
 - `apps/tiny-odd-one-lab/`：怪怪分類研究所
