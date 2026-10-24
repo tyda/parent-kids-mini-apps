@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d2b2a">
+  <meta name="description" content="親子輪流當編碼員和解碼員，用燈號暗號傳送圖案訊息的合作遊戲。">
+  <title>小小暗號電台</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../../">← 回工具合集</a>
+  <header>
+    <span class="tag">合作解碼 · 一支手機 · 免登入 · 5–15 分鐘</span>
+    <h1>📻 小小暗號電台</h1>
+    <p>一人把祕密圖案變成燈號暗號，一人用密碼本解開；每回合換角色、換密碼本、換小任務。</p>
+  </header>
+  <details id="guide" class="guide" open>
+    <summary>第一次玩？看怎麼玩</summary>
+    <ol>
+      <li><strong>選難度</strong>：每則訊息 2 或 3 個圖案，玩 4 或 6 回合。</li>
+      <li><strong>編碼員偷看</strong>：解碼員先轉身。編碼員看祕密圖案，在密碼本找到每個圖案的兩個燈（紅圓 ●、黃三角 ▲、藍方塊 ■），依序按下。</li>
+      <li><strong>送出並遮住</strong>：按「送出訊號」後畫面會藏起答案，再把手機交給解碼員。</li>
+      <li><strong>解碼員解開</strong>：每兩個燈是一組，對照密碼本選出圖案，按「揭曉」一起對答案。</li>
+      <li><strong>交換角色</strong>：每個猜對的圖案得 1 顆團隊星星，下一回合換人當編碼員。</li>
+    </ol>
+    <p>小提醒：每回合都有一張小任務卡（例如安靜任務、可以問一個是非題），照著玩更有趣，但不會扣分。可用鍵盤 1／2／3 按燈號。</p>
+  </details>
+  <p id="progress" class="progress" aria-live="polite"></p>
+  <div id="view"></div>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+  <button id="restart" class="reset" type="button" hidden>結束這場，回到準備畫面</button>
+  <p class="privacy">所有內容只在這支手機的瀏覽器裡，不連網、不上傳、不需要帳號。</p>
+</main>
+</body>
+</html>
