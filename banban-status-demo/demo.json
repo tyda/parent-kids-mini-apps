@@ -1,0 +1,21 @@
+{
+  "date": "展示模式",
+  "generated_at": "2026-01-01T10:00:00+08:00",
+  "source_stale": false,
+  "source_updated": null,
+  "unreadable": [],
+  "running": [],
+  "workers": [
+    {"name": "範例備份工作", "status": "complete", "detail": "最近一輪已完成", "updated": "2026-01-01T09:15:00+08:00"},
+    {"name": "範例資料檢查", "status": "checkpoint", "detail": "上次進度已記錄", "updated": "2026-01-01T08:30:00+08:00"}
+  ],
+  "timeline": [
+    {"id": "demo-1", "name": "早晨例行提醒", "at": "2026-01-01T07:30:00+08:00", "status": "triggered", "delivery": "notification", "recurring": false, "conditional": false},
+    {"id": "demo-2", "name": "午間喝水提醒", "at": "2026-01-01T12:00:00+08:00", "status": "upcoming", "delivery": "reminder", "recurring": false, "conditional": false},
+    {"id": "demo-3", "name": "傍晚整理待辦", "at": "2026-01-01T18:00:00+08:00", "status": "upcoming", "delivery": "notification", "recurring": false, "conditional": false},
+    {"id": "demo-internal", "name": "系統範例巡檢", "at": "2026-01-01T18:30:00+08:00", "status": "upcoming", "delivery": "internal", "recurring": true, "conditional": false}
+  ],
+  "paused": [
+    {"id": "demo-paused", "name": "範例暫停計畫", "kind": "cron"}
+  ]
+}

@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT_FILES = ("index.html", "styles.css")
 APP_FILES = ("index.html", "styles.css", "app.js", "sw.js", "manifest.webmanifest")
+DEMO_FILES = ("index.html", "style.css", "app.js", "demo.json")
 FORBIDDEN = re.compile(r"(?:tiny-clue-box|family-0[1-9]\.webp)", re.IGNORECASE)
 
 
@@ -23,6 +24,9 @@ def collect(repo: Path) -> list[Path]:
             if not path.is_file():
                 raise SystemExit(f"missing runtime file: {path.relative_to(repo)}")
             files.append(path)
+
+    # Public, synthetic-only preview. The private status server/API is never archived.
+    files.extend(repo / "banban-status-demo" / name for name in DEMO_FILES)
 
     for path in files:
         if not path.is_file():
