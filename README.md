@@ -23,6 +23,7 @@
 
 - 正式網址：<https://xn--kdw.tw/kids/>
 - `https://xn--kdw.tw/` 保留既有 Cloud Lab 首頁。
+- `https://xn--kdw.tw/kids/banban-status-demo/` 為獨立「班班狀態面板」的**公開互動展示**，只含虛構範例，不連本機 API 或真實提醒。真實面板仍只在本機。
 - 網站由 VPS 的 Nginx／Traefik 提供，部署內容為 `main` 的純靜態 runtime 檔案。
 
 ## 每週小工具開發流程

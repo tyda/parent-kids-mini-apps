@@ -7,6 +7,7 @@ on:
       - index.html
       - styles.css
       - apps/**
+      - banban-status-demo/**
       - scripts/build_vps_runtime.py
       - .github/workflows/deploy-vps.yml
   workflow_dispatch:
@@ -79,6 +80,8 @@ jobs:
           base='https://xn--kdw.tw/kids'
           test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/")" = '200'
           test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/styles.css")" = '200'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/banban-status-demo/")" = '200'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/banban-status-demo/demo.json")" = '200'
           for app in apps/*; do
             slug="$(basename "$app")"
             test "$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/apps/$slug/")" = '200'
